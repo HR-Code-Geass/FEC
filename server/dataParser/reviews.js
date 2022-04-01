@@ -1,57 +1,58 @@
 const axios = require('axios');
 const Promise = require('bluebird');
-let url = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 
-var config = {
+const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
+
+const config = {
   headers: {
-    Authorization: process.env.GIT_TOKEN
-  }
-}
+    Authorization: process.env.GIT_TOKEN,
+  },
+};
 
 module.exports = {
-  fetchReviewsData (productID = '65632', page=1, count=5, sort) {
-    return new Promise ((resolve, reject) => {
+  fetchReviewsData(sort, productID = 65632, page = 1, count = 5) {
+    return new Promise((resolve, reject) => {
       if (sort) {
-        axios.get(`${url}/reviews?product_id=${productID}&page=${page}&count=${page}&sort=${sort}`, config)
-          .then(res => resolve(res.data))
-          .catch(err => reject(err))
+        axios.get(`${url}/reviews?product_id=${productID}&page=${page}&count=${count}&sort=${sort}`, config)
+          .then((res) => resolve(res.data))
+          .catch((err) => reject(err));
       } else {
         axios.get(`${url}/reviews?product_id=${productID}&page=${page}&count=${count}`, config)
-          .then(res => resolve(res.data))
-          .catch(err => reject(err))
+          .then((res) => resolve(res.data))
+          .catch((err) => reject(err));
       }
-    })
+    });
   },
 
-  fetchReviewMeta (productID = '65632') {
+  fetchReviewMeta(productID = '65632') {
     return new Promise((resolve, reject) => {
       axios.get(`${url}/reviews/meta?product_id=${productID}`, config)
-        .then(res => resolve(res.data))
-        .catch(err => reject(err))
-    })
+        .then((res) => resolve(res.data))
+        .catch((err) => reject(err));
+    });
   },
 
-  addReview (data) {
+  addReview(data) {
     return new Promise((resolve, reject) => {
       axios.post(`${url}/reviews`, data, config)
-        .then(res => resolve(res))
-        .catch(err => reject(err))
-    })
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
+    });
   },
 
-  markReviewAsHelpful (reviewID = 1136190) {
+  markReviewAsHelpful(reviewID = 1136190) {
     return new Promise((resolve, reject) => {
-      axios.put(`${url}/reviews/${reviewID}/helpful`,'',config)
-        .then(res => resolve(res))
-        .catch(err => reject(err))
-    })
+      axios.put(`${url}/reviews/${reviewID}/helpful`, '', config)
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
+    });
   },
 
-  reportReview (reviewID = '1136190') {
+  reportReview(reviewID = '1136190') {
     return new Promise((resolve, reject) => {
-      axios.put(`${url}/reviews/${reviewID}/report`, '',config)
-      .then(res => resolve(res))
-      .catch(err => reject(err))
-    })
-  }
-}
+      axios.put(`${url}/reviews/${reviewID}/report`, '', config)
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
+    });
+  },
+};
