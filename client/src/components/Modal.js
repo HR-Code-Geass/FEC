@@ -54,11 +54,17 @@ const CloseSpan = styled.span`
   }
 `;
 
+/*
+* To use this properly, create a piece of state in your component where you want
+* to create a modal that determines whether the modal is visible and pass a
+* function that sets it to false as the `onClose` prop. Clicking the x or clicking
+* outside the modal should then properly close it.
+*/
 const Modal = ({ title, content, onClose }) => ReactDOM.createPortal(
   <ModalContainer onClick={onClose}>
     <ModalContent onClick={(e) => e.stopPropagation()}>
       <ModalHeader>
-        <CloseSpan>
+        <CloseSpan onClick={onClose}>
           &times;
         </CloseSpan>
         <h2>{title}</h2>
