@@ -16,15 +16,13 @@ const Container = styled.div`
   padding: 0.25em 1em;
 `;
 
-const Questions = () => {
-  return (
-    <Container>
-      Questions & Answers Component
-      <AskQuestion />
-      <QuestionSearch />
-      <QuestionsList />
-    </Container>
-  );
-};
+const Questions = () => (
+  <Container>
+    Questions & Answers Component
+    <AskQuestion />
+    <QuestionSearch />
+    <QuestionsList />
+  </Container>
+);
 
 export default Questions;
