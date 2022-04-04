@@ -59,14 +59,15 @@ const QuestionsList = () => {
                 </button>
               )
               : (questions.length
-              && (
-              <button
-                type="button"
-                onClick={() => setDisplayLimit(4)}
-              >
-                COLLAPSE QUESTIONS
-              </button>
-              )) || null}
+                && (
+                <button
+                  type="button"
+                  onClick={() => setDisplayLimit(4)}
+                >
+                  COLLAPSE QUESTIONS
+                </button>
+                ))
+                || null}
           </td>
         </tr>
       </tbody>
