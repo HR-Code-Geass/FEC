@@ -5,7 +5,7 @@ const QuestionInput = styled.input`
   width: 100%;
 `;
 
-const QuestionSearch = () => {
+const QuestionSearch = ({ setQuestionFilter }) => {
   const [userQuery, setUserQuery] = useState('');
 
   const handleFormSubmit = (e) => {
@@ -14,15 +14,13 @@ const QuestionSearch = () => {
   };
 
   const handleInputChange = (e) => {
-    let query = e.target.value;
+    const query = e.target.value;
     setUserQuery(query);
-    let filter = e.target.value.length > 2
-      ? e.target.value
+    const filter = query.length > 2
+      ? query
       : '';
-    if (filter) {
-      console.log(`Filtering results. Looking for '${query}'`);
-    }
-  }
+    setQuestionFilter(filter);
+  };
 
   return (
     <div>
@@ -37,6 +35,6 @@ const QuestionSearch = () => {
       </form>
     </div>
   );
-}
+};
 
 export default QuestionSearch;
