@@ -58,7 +58,7 @@ const QuestionsList = ({ questions }) => {
                   MORE ANSWERED QUESTIONS
                 </button>
               )
-              : (questions.length
+              : (questions.length > 2
                 && (
                 <button
                   type="button"
