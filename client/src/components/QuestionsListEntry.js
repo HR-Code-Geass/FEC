@@ -26,14 +26,14 @@ const QuestionsListEntry = ({ question }) => {
 
     if (answers.length > displayLimit) {
       return (
-        <button onClick={() => setDisplayLimit(Number.POSITIVE_INFINITY)}>
+        <button type="button" onClick={() => setDisplayLimit(Number.POSITIVE_INFINITY)}>
           SEE MORE ANSWERS
         </button>
       );
     }
 
-    return (<button onClick={() => setDisplayLimit(2)}>COLLAPSE ANSWERS</button>);
-  }
+    return (<button type="button" onClick={() => setDisplayLimit(2)}>COLLAPSE ANSWERS</button>);
+  };
 
   return (
     <>
@@ -46,19 +46,19 @@ const QuestionsListEntry = ({ question }) => {
         <QAText>
           {answers.map((ans, i) => (
             (i >= displayLimit)
-            ? null
-            : <QuestionsListEntryAnswer answer={ans} key={i} />
+              ? null
+              : <QuestionsListEntryAnswer answer={ans} key={i} />
           ))}
         </QAText>
       </tr>
       <tr>
-        <td></td>
+        <td />
         <td>
           {buttonToDisplay()}
         </td>
       </tr>
     </>
   );
-}
+};
 
 export default QuestionsListEntry;
