@@ -40,7 +40,7 @@ const Questions = () => {
       Questions & Answers Component
       <AskQuestion productID={productID} />
       <QuestionSearch setQuestionFilter={setQuestionFilter} />
-      <QuestionsList questions={filteredQuestions} />
+      <QuestionsList questions={filteredQuestions} productID={productID} />
     </Container>
   );
 };
