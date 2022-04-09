@@ -9,9 +9,7 @@ const AskQuestion = ({ productID }) => {
 
   return (
     <>
-      <Button onClick={() => setIsModalOpen(true)}>
-        Ask a question
-      </Button>
+      <Button onClick={() => setIsModalOpen(true)}>Ask a question</Button>
       {isModalOpen
         && (
         <Modal
