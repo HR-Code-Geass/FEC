@@ -25,5 +25,6 @@ module.exports = {
     ],
     'arrow-body-style': ['error', 'as-needed'],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
 };
