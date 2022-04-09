@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -62,7 +63,7 @@ const Success = styled.h6`
   margin: 0;
 `;
 
-const AskQuestionModalContent = ({
+const AddAnswerModalContent = ({
   productID, questionBody, questionID, onClose,
 }) => {
   const [answer, setAnswer] = useState('');
@@ -97,12 +98,12 @@ const AskQuestionModalContent = ({
     }
 
     // Email address is invalid
-    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email)) {
+    if (!(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/).test(email)) {
       return setErrorMessage('You must enter the following: A valid email address');
     }
 
     setErrorMessage('');
-    axios.post(`/qa/questions/${questionID}/answers`, {
+    return axios.post(`/qa/questions/${questionID}/answers`, {
       body: answer,
       name: nickname,
       email,
@@ -154,8 +155,8 @@ const AskQuestionModalContent = ({
         <label htmlFor="photos">Upload photos:</label>
         <PhotoInput type="file" name="photos" accept="image/*" onChange={handleImageChange} />
         <ThumbnailContainer>
-          {(imageURLs?.length && imageURLs.map((url, i) => (
-            <Thumbnail src={url} alt="" key={i} />
+          {(imageURLs?.length && imageURLs.map((url) => (
+            <Thumbnail src={url} alt="" key={url} />
           ))) || null}
         </ThumbnailContainer>
         <Button type="submit">Submit Answer</Button>
@@ -164,4 +165,11 @@ const AskQuestionModalContent = ({
   );
 };
 
-export default AskQuestionModalContent;
+AddAnswerModalContent.propTypes = {
+  productID: PropTypes.number.isRequired,
+  questionBody: PropTypes.string.isRequired,
+  questionID: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+export default AddAnswerModalContent;
