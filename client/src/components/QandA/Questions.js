@@ -20,7 +20,7 @@ const QAContainer = styled.div`
 const Questions = () => {
   const [questions, setQuestions] = useState([]);
   const [questionFilter, setQuestionFilter] = useState('');
-  const productID = 62635; // this will obviously need to be passed as a prop/through context
+  const productID = 62634; // this will obviously need to be passed as a prop/through context
 
   const filteredQuestions = questionFilter
     ? questions.filter((q) => q.question_body.includes(questionFilter))
