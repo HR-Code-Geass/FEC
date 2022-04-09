@@ -19,7 +19,6 @@ const Container = styled.div`
 
 const Questions = () => {
   const [questions, setQuestions] = useState([]);
-  // const [userQuery, setUserQuery] = useState('');
   const [questionFilter, setQuestionFilter] = useState('');
   const productID = 65633; // this will obviously need to be passed as a prop/through context
 
