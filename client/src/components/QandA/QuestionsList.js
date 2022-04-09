@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import { Button } from '../presentation/Button.styles';
 import QuestionsListEntry from './QuestionsListEntry';
-
-const Button = styled.button`
-  background: transparent;
-  color: white;
-  border-radius: 3px;
-  background-color: #112D4E;
-  margin: 0 1em;
-  padding: 0.25em 1em;
-`;
 
 const QuestionsTable = styled.table`
   border: none;
@@ -56,7 +48,7 @@ const QuestionsList = ({ questions, productID }) => {
         {questions?.map((q, i) => (
           (i >= displayLimit)
             ? null
-            : <QuestionsListEntry question={q} key={i} productID={productID} />
+            : <QuestionsListEntry question={q} key={q.question_id} productID={productID} />
         ))}
         <tr>
           <td colSpan="2" style={{ textAlign: 'center' }}>
@@ -68,6 +60,11 @@ const QuestionsList = ({ questions, productID }) => {
       </tbody>
     </QuestionsTable>
   );
+};
+
+QuestionsList.propTypes = {
+  questions: PropTypes.instanceOf(Array).isRequired,
+  productID: PropTypes.number.isRequired,
 };
 
 export default QuestionsList;
