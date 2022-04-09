@@ -48,17 +48,17 @@ router.get('/reviews/meta', (req, res) => {
 
 router.post('/reviews', (req, res) => {
   fetchData.reviews.addReview(req.body)
-    .then(() => res.send(201));
+    .then(() => res.sendStatus(201));
 });
 
 router.put('/reviews/:review_id/helpful', (req, res) => {
   fetchData.reviews.markReviewAsHelpful(req.params.review_id)
-    .then(() => res.send(204));
+    .then(() => res.sendStatus(204));
 });
 
 router.put('/reviews/:review_id/report', (req, res) => {
   fetchData.reviews.reportReview(req.params.review_id)
-    .then(() => res.send(204));
+    .then(() => res.sendStatus(204));
 });
 
 // Questions and Answers
@@ -78,32 +78,32 @@ router.get('/qa/questions/:question_id/answers', (req, res) => {
 
 router.post('/qa/questions', (req, res) => {
   fetchData.questions.addQuestion(req.body)
-    .then(() => res.send(201));
+    .then(() => res.sendStatus(201));
 });
 
 router.post('/qa/questions/:question_id/answers', (req, res) => {
   fetchData.questions.addAnswer(req.params.question_id, req.body)
-    .then(() => res.send(201));
+    .then(() => res.sendStatus(201));
 });
 
 router.put('/qa/questions/:question_id/helpful', (req, res) => {
   fetchData.questions.makeQuestionAsHelpful(req.params.question_id)
-    .then(() => res.send(204));
+    .then(() => res.sendStatus(204));
 });
 
 router.put('/qa/questions/:question_id/report', (req, res) => {
   fetchData.questions.reportQuestion(req.params.question_id)
-    .then(() => res.send(204));
+    .then(() => res.sendStatus(204));
 });
 
 router.put('/qa/answers/:answer_id/helpful', (req, res) => {
   fetchData.questions.makeAnswerAsHelpful(req.params.answer_id)
-    .then(() => res.send(204));
+    .then(() => res.sendStatus(204));
 });
 
 router.put('/qa/answers/:answer_id/report', (req, res) => {
   fetchData.questions.reportAnswer(req.params.answer_id)
-    .then(() => res.send(204));
+    .then(() => res.sendStatus(204));
 });
 
 // Cart
@@ -113,7 +113,7 @@ router.get('/cart', (req, res) => {
 });
 router.post('/cart', (req, res) => {
   fetchData.cart.addCart(req.body)
-    .then(() => res.send(201));
+    .then(() => res.sendStatus(201));
 });
 
 module.exports = router;
