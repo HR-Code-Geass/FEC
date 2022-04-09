@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// import axios from 'axios';
 
 import QuestionsListEntry from './QuestionsListEntry';
 
@@ -17,23 +16,8 @@ const QATextColumn = styled.col`
   width: 100%;
 `;
 
-// const MoreQuestions = styled.td`
-//   text-align: center;
-// `;
-
 const QuestionsList = ({ questions }) => {
-  // const productID = 65633; // this will obviously need to be passed as a prop/through context
-  // const [questions, setQuestions] = useState([]);
   const [displayLimit, setDisplayLimit] = useState(4); // number of questions to display
-
-  // comparator to sort questions by "question_helpfulness" property
-  // const helpfulnessComparator = (a, b) => b.question_helpfulness - a.question_helpfulness;
-
-  // useEffect(() => {
-  //   axios.get('/qa/questions', { params: { product_id: productID } })
-  //     .then((res) => setQuestions(res.data.results.sort(helpfulnessComparator)))
-  //     .catch((err) => console.error(`Error getting questions & answers: ${err}`));
-  // }, []);
 
   return (
     <QuestionsTable>
