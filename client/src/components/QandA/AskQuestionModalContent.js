@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -67,12 +68,12 @@ const AskQuestionModalContent = ({ productID, onClose }) => {
     }
 
     // Email address is invalid
-    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email)) {
+    if (!(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/).test(email)) {
       return setErrorMessage('You must enter the following: A valid email address');
     }
 
     setErrorMessage('');
-    axios.post('/qa/questions', {
+    return axios.post('/qa/questions', {
       body: question,
       name: nickname,
       email,
@@ -125,6 +126,11 @@ const AskQuestionModalContent = ({ productID, onClose }) => {
       </QuestionForm>
     </Container>
   );
+};
+
+AskQuestionModalContent.propTypes = {
+  productID: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default AskQuestionModalContent;
