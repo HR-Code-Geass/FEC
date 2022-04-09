@@ -28,7 +28,7 @@ const AskQuestionModalContent = ({ productID, onClose }) => {
     }
 
     setErrorMessage('');
-    return axios.post('/qa/questions', {
+    axios.post('/qa/questions', {
       body: question,
       name: nickname,
       email,
@@ -39,6 +39,8 @@ const AskQuestionModalContent = ({ productID, onClose }) => {
         setTimeout(onClose, 500);
       })
       .catch((err) => console.error(`Error posting new question: ${err}`));
+
+    return null;
   };
 
   return (

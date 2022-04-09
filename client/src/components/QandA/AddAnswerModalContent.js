@@ -42,7 +42,7 @@ const AddAnswerModalContent = ({
     }
 
     setErrorMessage('');
-    return axios.post(`/qa/questions/${questionID}/answers`, {
+    axios.post(`/qa/questions/${questionID}/answers`, {
       body: answer,
       name: nickname,
       email,
@@ -53,6 +53,8 @@ const AddAnswerModalContent = ({
         setTimeout(onClose, 500);
       })
       .catch((err) => console.error(`Error posting new question: ${err}`));
+
+    return null;
   };
 
   return (
