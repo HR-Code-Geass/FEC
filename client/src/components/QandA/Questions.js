@@ -7,7 +7,7 @@ import QuestionSearch from './QuestionSearch';
 import QuestionsList from './QuestionsList';
 
 // This is just for me to quickly see my own work. This will be removed.
-const Container = styled.div`
+const QAContainer = styled.div`
   background: transparent;
   color: #111;
   border-radius: 3px;
@@ -20,7 +20,7 @@ const Container = styled.div`
 const Questions = () => {
   const [questions, setQuestions] = useState([]);
   const [questionFilter, setQuestionFilter] = useState('');
-  const productID = 65633; // this will obviously need to be passed as a prop/through context
+  const productID = 62635; // this will obviously need to be passed as a prop/through context
 
   const filteredQuestions = questionFilter
     ? questions.filter((q) => q.question_body.includes(questionFilter))
@@ -36,12 +36,12 @@ const Questions = () => {
   }, []);
 
   return (
-    <Container>
+    <QAContainer>
       Questions & Answers Component
       <AskQuestion productID={productID} />
       <QuestionSearch setQuestionFilter={setQuestionFilter} />
       <QuestionsList questions={filteredQuestions} productID={productID} />
-    </Container>
+    </QAContainer>
   );
 };
 
