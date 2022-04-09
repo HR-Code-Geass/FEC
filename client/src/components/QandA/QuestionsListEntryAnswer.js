@@ -53,13 +53,13 @@ const QuestionListEntryAnswer = ({ answer }) => {
     <>
       {/* {JSON.stringify(answer, null, 2)} */}
       <AnswerText>{body}</AnswerText>
+      <ThumbnailBar thumbnails={photos} clickable />
       <ByLine>
         {`by ${answererName}, ${date} | Helpful? `}
         <LinkButton type="button" onClick={markHelpful}>Yes</LinkButton>
         {` (${helpfulness + markedHelpful}) | `}
         {reportAnswer}
       </ByLine>
-      <ThumbnailBar thumbnails={photos} />
     </>
   );
 };
