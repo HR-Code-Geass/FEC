@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import QuestionsListEntryAnswer from './QuestionsListEntryAnswer';
 
 const QA = styled.td`
@@ -11,8 +12,28 @@ const QAText = styled.td`
   vertical-align: top;
 `;
 
+const QuestionContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Question = styled.div`
+`;
+
+const QuestionLinks = styled.div`
+`;
+
 const QuestionsListEntry = ({ question }) => {
   const [displayLimit, setDisplayLimit] = useState(2); // number of answers to display
+  const [markedHelpful, setMarkedHelpful] = useState(false);
+
+  const markHelpful = () => {
+    if (markedHelpful) return; // can only mark an answer helpful once
+
+    axios.put(`/qa/questions/${question.question_id}/helpful`)
+      .then(() => setMarkedHelpful(true))
+      .catch((err) => console.error(`Error marking question helpful: ${err}`));
+  };
 
   let { question_body: questionBody, answers } = question;
 
@@ -39,7 +60,19 @@ const QuestionsListEntry = ({ question }) => {
     <>
       <tr>
         <QA><b>Q:</b></QA>
-        <QAText>{questionBody}</QAText>
+        <QAText>
+          <QuestionContainer>
+            <Question>
+              {questionBody}
+            </Question>
+            <QuestionLinks>
+              Helpful?&nbsp;
+              <button type="button" onClick={markHelpful}>Yes</button>
+              {` (${question.question_helpfulness + markedHelpful}) | `}
+              <button type="button" onClick={() => {}}>Add Answer</button>
+            </QuestionLinks>
+          </QuestionContainer>
+        </QAText>
       </tr>
       <tr>
         <QA><b>A:</b></QA>
