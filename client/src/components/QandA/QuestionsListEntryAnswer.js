@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
 import axios from 'axios';
-
-const UnstyledButton = styled.button`
-  all: unset;
-  text-decoration: underline;
-
-  &:hover {
-    color: #006;
-    cursor: pointer;
-  }
-`;
+import { LinkButton } from '../presentation/Button.styles';
+import ThumbnailBar from './ThumbnailBar';
 
 const AnswerText = styled.p`
   padding: 0;
@@ -32,9 +25,10 @@ const QuestionListEntryAnswer = ({ answer }) => {
   const [markedHelpful, setMarkedHelpful] = useState(false);
   const [reported, setReported] = useState(false);
 
-  let {
-    id, body, date, answerer_name, helpfulness, photos,
+  const {
+    body, answerer_name: answererName, helpfulness, photos,
   } = answer;
+  let { date } = answer;
   date = moment(date, 'YYYY-MM-DDT00:00.00.000Z').format('MMMM DD, yyyy');
 
   const sendReport = () => {
@@ -53,20 +47,25 @@ const QuestionListEntryAnswer = ({ answer }) => {
 
   const reportAnswer = reported
     ? <Report>Reported</Report>
-    : <UnstyledButton type="button" onClick={sendReport}>Report</UnstyledButton>;
+    : <LinkButton type="button" onClick={sendReport}>Report</LinkButton>;
 
   return (
     <>
       {/* {JSON.stringify(answer, null, 2)} */}
       <AnswerText>{body}</AnswerText>
       <ByLine>
-        {`by ${answerer_name}, ${date} | Helpful? `}
-        <UnstyledButton type="button" onClick={markHelpful}>Yes</UnstyledButton>
+        {`by ${answererName}, ${date} | Helpful? `}
+        <LinkButton type="button" onClick={markHelpful}>Yes</LinkButton>
         {` (${helpfulness + markedHelpful}) | `}
         {reportAnswer}
       </ByLine>
+      <ThumbnailBar thumbnails={photos} />
     </>
   );
+};
+
+QuestionListEntryAnswer.propTypes = {
+  answer: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default QuestionListEntryAnswer;
