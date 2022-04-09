@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
 import QuestionsListEntryAnswer from './QuestionsListEntryAnswer';
@@ -55,7 +56,8 @@ const QuestionsListEntry = ({ question, productID }) => {
       .catch((err) => console.error(`Error marking question helpful: ${err}`));
   };
 
-  let { question_id: questionID, question_body: questionBody, answers } = question;
+  const { question_id: questionID, question_body: questionBody } = question;
+  let { answers } = question;
 
   // comparator to sort answers by "helpfulness" property
   const helpfulnessComparator = (a, b) => b.helpfulness - a.helpfulness;
@@ -89,7 +91,11 @@ const QuestionsListEntry = ({ question, productID }) => {
               Helpful?&nbsp;
               <UnstyledButton type="button" onClick={markHelpful}>Yes</UnstyledButton>
               {` (${question.question_helpfulness + markedHelpful}) | `}
-              <AddAnswer productID={productID} questionID={questionID} questionBody={questionBody} />
+              <AddAnswer
+                productID={productID}
+                questionID={questionID}
+                questionBody={questionBody}
+              />
             </QuestionLinks>
           </QuestionContainer>
         </QAText>
@@ -100,7 +106,7 @@ const QuestionsListEntry = ({ question, productID }) => {
           {answers.map((ans, i) => (
             (i >= displayLimit)
               ? null
-              : <QuestionsListEntryAnswer answer={ans} key={i} />
+              : <QuestionsListEntryAnswer answer={ans} key={ans.id} />
           ))}
         </QAText>
       </tr>
@@ -112,6 +118,11 @@ const QuestionsListEntry = ({ question, productID }) => {
       </tr>
     </>
   );
+};
+
+QuestionsListEntry.propTypes = {
+  question: PropTypes.instanceOf(Object).isRequired,
+  productID: PropTypes.number.isRequired,
 };
 
 export default QuestionsListEntry;
