@@ -24,3 +24,13 @@ export const LargeButton = styled.button`
     cursor: pointer;
   };
 `;
+
+export const LinkButton = styled.button`
+  all: unset;
+  text-decoration: underline;
+
+  &:hover {
+    color: #006;
+    cursor: pointer;
+  }
+`;
