@@ -2,6 +2,26 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import QuestionsListEntryAnswer from './QuestionsListEntryAnswer';
+import AddAnswer from './AddAnswer';
+
+const Button = styled.button`
+  background: transparent;
+  color: white;
+  border-radius: 3px;
+  background-color: #112D4E;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+`;
+
+const UnstyledButton = styled.button`
+  all: unset;
+  text-decoration: underline;
+
+  &:hover {
+    color: #006;
+    cursor: pointer;
+  }
+`;
 
 const QA = styled.td`
   vertical-align: top;
@@ -23,7 +43,7 @@ const Question = styled.div`
 const QuestionLinks = styled.div`
 `;
 
-const QuestionsListEntry = ({ question }) => {
+const QuestionsListEntry = ({ question, productID }) => {
   const [displayLimit, setDisplayLimit] = useState(2); // number of answers to display
   const [markedHelpful, setMarkedHelpful] = useState(false);
 
@@ -35,9 +55,9 @@ const QuestionsListEntry = ({ question }) => {
       .catch((err) => console.error(`Error marking question helpful: ${err}`));
   };
 
-  let { question_body: questionBody, answers } = question;
+  let { question_id: questionID, question_body: questionBody, answers } = question;
 
-  // comparator to sort questions by "question_helpfulness" property
+  // comparator to sort answers by "helpfulness" property
   const helpfulnessComparator = (a, b) => b.helpfulness - a.helpfulness;
   // TODO: Put answers by seller at the top!
   answers = Object.values(answers).sort(helpfulnessComparator);
@@ -47,13 +67,13 @@ const QuestionsListEntry = ({ question }) => {
 
     if (answers.length > displayLimit) {
       return (
-        <button type="button" onClick={() => setDisplayLimit(Number.POSITIVE_INFINITY)}>
+        <Button type="button" onClick={() => setDisplayLimit(Number.POSITIVE_INFINITY)}>
           SEE MORE ANSWERS
-        </button>
+        </Button>
       );
     }
 
-    return (<button type="button" onClick={() => setDisplayLimit(2)}>COLLAPSE ANSWERS</button>);
+    return (<Button type="button" onClick={() => setDisplayLimit(2)}>COLLAPSE ANSWERS</Button>);
   };
 
   return (
@@ -67,9 +87,9 @@ const QuestionsListEntry = ({ question }) => {
             </Question>
             <QuestionLinks>
               Helpful?&nbsp;
-              <button type="button" onClick={markHelpful}>Yes</button>
+              <UnstyledButton type="button" onClick={markHelpful}>Yes</UnstyledButton>
               {` (${question.question_helpfulness + markedHelpful}) | `}
-              <button type="button" onClick={() => {}}>Add Answer</button>
+              <AddAnswer productID={productID} questionID={questionID} questionBody={questionBody} />
             </QuestionLinks>
           </QuestionContainer>
         </QAText>
