@@ -10,9 +10,12 @@ const config = {
 };
 
 module.exports = {
-  fetchQuestionsData(productID = 65632, page = 1, count = 5) {
+  fetchQuestionsData(productID = 65632, page, count) {
+    const qURL = (page && count)
+      ? `${url}/qa/questions?product_id=${productID}&page=${page}&count=${count}`
+      : `${url}/qa/questions?product_id=${productID}&count=999999`;
     return new Promise((resolve, reject) => {
-      axios.get(`${url}/qa/questions?product_id=${productID}&page=${page}&count=${count}`, config)
+      axios.get(qURL, config)
         .then((res) => resolve(res.data))
         .catch((err) => reject(err));
     });
