@@ -1,26 +1,17 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { LinkButton } from '../presentation/Button.styles';
 import Modal from '../Modal';
 import AddAnswerModalContent from './AddAnswerModalContent';
-
-const Button = styled.button`
-  all: unset;
-  text-decoration: underline;
-
-  &:hover {
-    color: #006;
-    cursor: pointer;
-  }
-`;
 
 const AddAnswer = ({ productID, questionID, questionBody }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
-      <Button onClick={() => setIsModalOpen(true)}>
+      <LinkButton onClick={() => setIsModalOpen(true)}>
         Add Answer
-      </Button>
+      </LinkButton>
       {isModalOpen
         && (
         <Modal
@@ -38,6 +29,12 @@ const AddAnswer = ({ productID, questionID, questionBody }) => {
         )}
     </>
   );
+};
+
+AddAnswer.propTypes = {
+  productID: PropTypes.number.isRequired,
+  questionID: PropTypes.number.isRequired,
+  questionBody: PropTypes.string.isRequired,
 };
 
 export default AddAnswer;
