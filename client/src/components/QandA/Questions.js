@@ -23,7 +23,7 @@ const Questions = () => {
   const productID = 62635; // this will obviously need to be passed as a prop/through context
 
   const filteredQuestions = questionFilter
-    ? questions.filter((q) => q.question_body.includes(questionFilter))
+    ? questions.filter((q) => q.question_body.toLowerCase().includes(questionFilter.toLowerCase()))
     : questions;
 
   // comparator to sort questions by "question_helpfulness" property
