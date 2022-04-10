@@ -61,8 +61,9 @@ const QuestionsListEntry = ({ question, productID }) => {
 
   // comparator to sort answers by "helpfulness" property
   const helpfulnessComparator = (a, b) => b.helpfulness - a.helpfulness;
+  const sellerComparator = (a, b) => (b.answerer_name === 'Seller') - (a.answerer_name === 'Seller');
   // TODO: Put answers by seller at the top!
-  answers = Object.values(answers || {}).sort(helpfulnessComparator);
+  answers = Object.values(answers || {}).sort(helpfulnessComparator).sort(sellerComparator);
 
   const buttonToDisplay = () => {
     if (answers.length <= 2) return null;
