@@ -32,7 +32,7 @@ const Questions = () => {
   const [questionsDisplayLimit, setQuestionsDisplayLimit] = useState(2);
   const [nextPage, setNextPage] = useState(1);
   const [allQuestionsLoaded, setAllQuestionsLoaded] = useState(false);
-  const productID = 62631; // this will obviously need to be passed as a prop/through context
+  const productID = 65633; // this will obviously need to be passed as a prop/through context
 
   const filteredQuestions = questionFilter
     ? questions.filter((q) => q.question_body.toLowerCase().includes(questionFilter.toLowerCase()))
@@ -73,20 +73,26 @@ const Questions = () => {
 
   return (
     <QAContainer>
-      Questions & Answers Component
-      <AskQuestion productID={productID} />
-      <QuestionSearch setQuestionFilter={setQuestionFilter} />
-      <QuestionsList
-        questions={filteredQuestions}
-        displayLimit={questionsDisplayLimit}
-        productID={productID}
-      />
+      {(questions.length
+        && (
+        <>
+          <QuestionSearch setQuestionFilter={setQuestionFilter} />
+          <QuestionsList
+            questions={filteredQuestions}
+            displayLimit={questionsDisplayLimit}
+            productID={productID}
+          />
+          <ButtonContainer>
+            <MoreQuestionsButton
+              numberQuestions={numberQuestions}
+              displayLimit={questionsDisplayLimit}
+              setDisplayLimit={setQuestionsDisplayLimit}
+            />
+          </ButtonContainer>
+        </>
+        )) || null}
       <ButtonContainer>
-        <MoreQuestionsButton
-          numberQuestions={numberQuestions}
-          displayLimit={questionsDisplayLimit}
-          setDisplayLimit={setQuestionsDisplayLimit}
-        />
+        <AskQuestion productID={productID} />
       </ButtonContainer>
     </QAContainer>
   );
