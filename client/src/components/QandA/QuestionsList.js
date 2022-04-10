@@ -17,53 +17,64 @@ const QATextColumn = styled.col`
   width: 100%;
 `;
 
-const QuestionsList = ({ questions, productID }) => {
-  const [displayLimit, setDisplayLimit] = useState(4); // number of questions to display
+const QAContainer = styled.div`
+  width: 100%;
+  max-height: 40vh;
+  overflow-y: auto;
+  text-align: left;
+`;
 
-  const MoreAnsweredQuestionsButton = (
-    <Button
-      type="button"
-      onClick={() => setDisplayLimit(Number.POSITIVE_INFINITY)}
-    >
-      MORE ANSWERED QUESTIONS
-    </Button>
+const QLContainer = styled.div`
+  width: 100%;
+  text-align: center;
+`;
+
+const QuestionsList = ({ questions, displayLimit, productID }) =>
+// const [displayLimit, setDisplayLimit] = useState(2); // number of questions to display
+
+// const MoreAnsweredQuestionsButton = (
+//   <Button
+//     type="button"
+//     onClick={() => setDisplayLimit(Number.POSITIVE_INFINITY)}
+//   >
+//     MORE ANSWERED QUESTIONS
+//   </Button>
+// );
+
+// const CollapseQuestionsButton = (
+//   <Button
+//     type="button"
+//     onClick={() => setDisplayLimit(2)}
+//   >
+//     COLLAPSE QUESTIONS
+//   </Button>
+// );
+
+  (
+    <QLContainer>
+      <QAContainer>
+        <QuestionsTable>
+          <colgroup>
+            <QAColumn span="1" />
+            <QATextColumn span="1" />
+          </colgroup>
+          <tbody>
+            {questions?.map((q, i) => (
+              (i >= displayLimit)
+                ? null
+                : <QuestionsListEntry question={q} key={q.question_id} productID={productID} />
+            ))}
+          </tbody>
+        </QuestionsTable>
+      </QAContainer>
+      {/* {questions.length > displayLimit
+        ? MoreAnsweredQuestionsButton
+        : (questions.length > 2 && CollapseQuestionsButton) || null} */}
+    </QLContainer>
   );
-
-  const CollapseQuestionsButton = (
-    <Button
-      type="button"
-      onClick={() => setDisplayLimit(4)}
-    >
-      COLLAPSE QUESTIONS
-    </Button>
-  );
-
-  return (
-    <QuestionsTable>
-      <colgroup>
-        <QAColumn span="1" />
-        <QATextColumn span="1" />
-      </colgroup>
-      <tbody>
-        {questions?.map((q, i) => (
-          (i >= displayLimit)
-            ? null
-            : <QuestionsListEntry question={q} key={q.question_id} productID={productID} />
-        ))}
-        <tr>
-          <td colSpan="2" style={{ textAlign: 'center' }}>
-            {questions.length > displayLimit
-              ? MoreAnsweredQuestionsButton
-              : (questions.length > 2 && CollapseQuestionsButton) || null}
-          </td>
-        </tr>
-      </tbody>
-    </QuestionsTable>
-  );
-};
-
 QuestionsList.propTypes = {
   questions: PropTypes.instanceOf(Array).isRequired,
+  displayLimit: PropTypes.number.isRequired,
   productID: PropTypes.number.isRequired,
 };
 
