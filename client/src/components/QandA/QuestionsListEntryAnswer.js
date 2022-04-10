@@ -55,7 +55,6 @@ const QuestionListEntryAnswer = ({ answer }) => {
 
   return (
     <>
-      {/* {JSON.stringify(answer, null, 2)} */}
       <AnswerText>{body}</AnswerText>
       <ThumbnailBar thumbnails={photos} clickable />
       <ByLine>
