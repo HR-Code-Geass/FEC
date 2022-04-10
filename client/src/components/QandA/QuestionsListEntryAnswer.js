@@ -49,13 +49,19 @@ const QuestionListEntryAnswer = ({ answer }) => {
     ? <Report>Reported</Report>
     : <LinkButton type="button" onClick={sendReport}>Report</LinkButton>;
 
+  const user = (answererName === 'Seller')
+    ? <b>Seller</b>
+    : answererName;
+
   return (
     <>
       {/* {JSON.stringify(answer, null, 2)} */}
       <AnswerText>{body}</AnswerText>
       <ThumbnailBar thumbnails={photos} clickable />
       <ByLine>
-        {`by ${answererName}, ${date} | Helpful? `}
+        {'by '}
+        {user}
+        {`, ${date} | Helpful? `}
         <LinkButton type="button" onClick={markHelpful}>Yes</LinkButton>
         {` (${helpfulness + markedHelpful}) | `}
         {reportAnswer}
