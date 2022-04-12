@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import StarBar from '../StarBar';
 
 const RateNum = styled.h1`
@@ -107,30 +108,106 @@ const RatingBreakdown = ({
       </h4>
       <br />
       <RatingUser>
-        <ScaleDiv><StarButton className="starScale" style={(star5onClick) ? { color: 'red' } : {}} onClick={() => { (star5onClick) ? (setStar5onClick(false), filter.splice(filter.indexOf(5), 1), filterStar()) : (setStar5onClick(true), filter.unshift(5), filterStar()); }}><u>5 stars</u></StarButton></ScaleDiv>
+        <ScaleDiv>
+          <StarButton
+            type="button"
+            className="starScale"
+            style={(star5onClick) ? { color: 'red' } : {}}
+            onClick={() => (
+              star5onClick ? (setStar5onClick(false),
+              filter.splice(filter.indexOf(5), 1), filterStar()) : (setStar5onClick(true),
+              filter.unshift(5), filterStar())
+            )}
+          >
+            <u>5 stars</u>
+          </StarButton>
+        </ScaleDiv>
         <Bar><InsideBar style={{ width: star.star5 }} /></Bar>
       </RatingUser>
       <br />
       <RatingUser>
-        <ScaleDiv><StarButton className="starScale" style={(star4onClick) ? { color: 'red' } : {}} onClick={() => { (star4onClick) ? (setStar4onClick(false), filter.splice(filter.indexOf(4), 1), filterStar()) : (setStar4onClick(true), filter.unshift(4), filterStar()); }}><u>4 stars</u></StarButton></ScaleDiv>
+        <ScaleDiv>
+          <StarButton
+            className="starScale"
+            style={(star4onClick) ? { color: 'red' } : {}}
+            onClick={() => (
+              (star4onClick) ? (setStar4onClick(false),
+              filter.splice(filter.indexOf(4), 1), filterStar()) : (setStar4onClick(true),
+              filter.unshift(4), filterStar())
+            )}
+          >
+            <u>4 stars</u>
+          </StarButton>
+
+        </ScaleDiv>
         <Bar><InsideBar style={{ width: star.star4 }} /></Bar>
       </RatingUser>
       <br />
       <RatingUser>
-        <ScaleDiv><StarButton className="starScale" style={(star3onClick) ? { color: 'red' } : {}} onClick={() => { (star3onClick) ? (setStar3onClick(false), filter.splice(filter.indexOf(3), 1), filterStar()) : (setStar3onClick(true), filter.unshift(3), filterStar()); }}><u>3 stars</u></StarButton></ScaleDiv>
+        <ScaleDiv>
+          <StarButton
+            className="starScale"
+            style={(star3onClick) ? { color: 'red' } : {}}
+            onClick={() => (
+              (star3onClick) ? (setStar3onClick(false),
+              filter.splice(filter.indexOf(3), 1), filterStar()) : (setStar3onClick(true),
+              filter.unshift(3), filterStar())
+            )}
+          >
+            <u>3 stars</u>
+          </StarButton>
+
+        </ScaleDiv>
         <Bar><InsideBar style={{ width: star.star3 }} /></Bar>
       </RatingUser>
       <br />
       <RatingUser>
-        <ScaleDiv><StarButton className="starScale" style={(star2onClick) ? { color: 'red' } : {}} onClick={() => { (star2onClick) ? (setStar2onClick(false), filter.splice(filter.indexOf(2), 1), filterStar()) : (setStar2onClick(true), filter.unshift(2), filterStar()); }}><u>2 stars</u></StarButton></ScaleDiv>
+        <ScaleDiv>
+          <StarButton
+            className="starScale"
+            style={(star2onClick) ? { color: 'red' } : {}}
+            onClick={() => ((
+              star2onClick) ? (setStar2onClick(false),
+              filter.splice(filter.indexOf(2), 1), filterStar()) : (setStar2onClick(true),
+              filter.unshift(2), filterStar())
+            )}
+          >
+            <u>2 stars</u>
+          </StarButton>
+
+        </ScaleDiv>
         <Bar><InsideBar style={{ width: star.star2 }} /></Bar>
       </RatingUser>
       <br />
       <RatingUser>
-        <ScaleDiv><StarButton className="starScale" style={(star1onClick) ? { color: 'red' } : {}} onClick={() => { (star1onClick) ? (setStar1onClick(false), filter.splice(filter.indexOf(1), 1), filterStar(filter)) : (setStar1onClick(true), filter.unshift(1), filterStar(filter)); }}><u>1 stars</u></StarButton></ScaleDiv>
+        <ScaleDiv>
+          <StarButton
+            type="button"
+            className="starScale"
+            style={(star1onClick) ? { color: 'red' } : {}}
+            onClick={() => (
+              (star1onClick) ? (setStar1onClick(false),
+              filter.splice(filter.indexOf(1), 1), filterStar(filter)) : (setStar1onClick(true),
+              filter.unshift(1), filterStar(filter))
+            )}
+          >
+            <u>1 stars</u>
+          </StarButton>
+
+        </ScaleDiv>
         <Bar><InsideBar style={{ width: star.star1 }} /></Bar>
       </RatingUser>
-          <StarButton onClick={() => { setReviewsData(data);setStar1onClick(false);setStar2onClick(false);;setStar3onClick(false);setStar4onClick(false);setStar5onClick(false); setfilter([]); }}><u>no filter</u></StarButton>
+      <StarButton
+        onClick={() => {
+          setReviewsData(data); setStar1onClick(false);
+          setStar2onClick(false); setStar3onClick(false);
+          setStar4onClick(false); setStar5onClick(false);
+          setfilter([]);
+        }}
+      >
+        <u>no filter</u>
+
+      </StarButton>
 
       <br />
       <div>
@@ -138,7 +215,7 @@ const RatingBreakdown = ({
           Size
           <CharBar>
             <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${char.size / 5 * 100}%`,
+              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.size / 5) * 100}%`,
             }}
             >
               <Triangle />
@@ -162,7 +239,7 @@ const RatingBreakdown = ({
           Width
           <CharBar>
             <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${char.width / 5 * 100}%`,
+              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.width / 5) * 100}%`,
             }}
             >
               <Triangle />
@@ -187,7 +264,7 @@ const RatingBreakdown = ({
           <br />
           <CharBar>
             <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${char.comfort / 5 * 100}%`,
+              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.comfort / 5) * 100}%`,
             }}
             >
               <Triangle />
@@ -213,7 +290,7 @@ const RatingBreakdown = ({
           Quality
           <CharBar>
             <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${char.quality / 5 * 100}%`,
+              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.quality / 5) * 100}%`,
             }}
             >
               <Triangle />
@@ -239,7 +316,7 @@ const RatingBreakdown = ({
           Length
           <CharBar>
             <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${char.quality / 5 * 100}%`,
+              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.quality / 5) * 100}%`,
             }}
             >
               <Triangle />
@@ -263,7 +340,7 @@ const RatingBreakdown = ({
           Fit
           <CharBar>
             <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${char.fit / 5 * 100}%`,
+              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.fit / 5) * 100}%`,
             }}
             >
               <Triangle />
@@ -285,6 +362,15 @@ const RatingBreakdown = ({
       </div>
     </RatingDiv>
   );
+};
+
+RatingBreakdown.propTypes = {
+  data: PropTypes.instanceOf(Object).isRequired,
+  setReviewsData: PropTypes.func.isRequired,
+  aveRate: PropTypes.number.isRequired,
+  recomPer: PropTypes.number.isRequired,
+  star: PropTypes.instanceOf(Object).isRequired,
+  char: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default RatingBreakdown;

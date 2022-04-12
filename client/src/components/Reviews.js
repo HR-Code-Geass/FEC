@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
 import {
@@ -30,7 +31,7 @@ const ReviewDiv = styled.div`
 `;
 
 const Reviews = ({ productID }) => {
-  productID = productID || 65635;
+  // productID = productID || 65635;
   // 65635 meta and reviews count are not the same
   // 65632 for testing the response
   // 65640 for testing the add reviews button
@@ -56,11 +57,11 @@ const Reviews = ({ productID }) => {
         const ratingArray = Object.keys(res.data.ratings);
         let rateSum = 0;
         let rateUnit = 0;
-        const star5 = res.data.ratings['5'];
-        const star4 = res.data.ratings['4'];
-        const star3 = res.data.ratings['3'];
-        const star2 = res.data.ratings['2'];
-        const star1 = res.data.ratings['1'];
+        const curstar5 = res.data.ratings['5'];
+        const curstar4 = res.data.ratings['4'];
+        const curstar3 = res.data.ratings['3'];
+        const curstar2 = res.data.ratings['2'];
+        const curstar1 = res.data.ratings['1'];
         setChar(res.data.characteristics);
 
         ratingArray.forEach((item) => {
@@ -69,19 +70,18 @@ const Reviews = ({ productID }) => {
         });
 
         const recomNum = Number(res.data.recommended.true);
-        const recomPer = (Math.round((recomNum / rateUnit) * 100));
-        setRecomPer(recomPer);
+        const currecomPer = (Math.round((recomNum / rateUnit) * 100));
+        setRecomPer(currecomPer);
 
         let rate = (Math.round((rateSum / rateUnit) * 10));
         rate *= 0.1;
         rate = rate.toFixed(1);
-        setTotalCount(rateUnit);
         setCount(rateUnit);
-        setStar5(`${Math.round((star5 / rateUnit) * 100)}%`);
-        setStar4(`${Math.round((star4 / rateUnit) * 100)}%`);
-        setStar3(`${Math.round((star3 / rateUnit) * 100)}%`);
-        setStar2(`${Math.round((star2 / rateUnit) * 100)}%`);
-        setStar1(`${Math.round((star1 / rateUnit) * 100)}%`);
+        setStar5(`${Math.round((curstar5 / rateUnit) * 100)}%`);
+        setStar4(`${Math.round((curstar4 / rateUnit) * 100)}%`);
+        setStar3(`${Math.round((curstar3 / rateUnit) * 100)}%`);
+        setStar2(`${Math.round((curstar2 / rateUnit) * 100)}%`);
+        setStar1(`${Math.round((curstar1 / rateUnit) * 100)}%`);
         setAveRate(rate);
       });
   }, [productID, dataUpdate]);
@@ -108,7 +108,7 @@ const Reviews = ({ productID }) => {
 
   const collapseStyle = { position: 'relative', top: '-90%', right: '-70%' };
   const reviews = reviewsData.map((review) => (
-    <div className="review" key={review.review_id} style={{ width: '60vw' }}>
+    <div className="review" key={review.review_id} style={{ width: '100%' }}>
       <ReviewListEntry review={review} setDataUpdate={setDataUpdate} />
     </div>
   ));
@@ -119,7 +119,7 @@ const Reviews = ({ productID }) => {
         <RatingBreakdown
           data={data}
           setReviewsData={setReviewsData}
-          aveRate={aveRate}
+          aveRate={Number(aveRate)}
           recomPer={recomPer}
           star={{
             star1,
@@ -156,7 +156,15 @@ const Reviews = ({ productID }) => {
               <tbody>
                 <tr>
                   <td colSpan="2">
-                    {reviewsData.length === 0 ? <div style={{ position: 'relative', top: '-46%', left: '80%' }}><h2>There is no review yet</h2></div> : reviews}
+                    {reviewsData.length === 0
+                      ? (
+                        <div
+                          style={{ position: 'relative', top: '-46%', left: '80%' }}
+                        >
+                          <h2>There is no review yet</h2>
+
+                        </div>
+                      ) : reviews}
                   </td>
                 </tr>
               </tbody>
@@ -177,6 +185,10 @@ const Reviews = ({ productID }) => {
       </RatingAndReview>
     </div>
   );
+};
+
+Reviews.propTypes = {
+  productID: PropTypes.number.isRequired,
 };
 
 export default Reviews;

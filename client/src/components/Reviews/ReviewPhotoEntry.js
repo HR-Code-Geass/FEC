@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Modal from './PhotoModal';
 
 const Photos = styled.div`
@@ -12,12 +13,18 @@ const Photos = styled.div`
 
 const ReviewPhotoEntry = ({ photo, setPhotoOnClick, photoOnClick }) => (
   <Photos>
-    <div key={photo.id} onClick={() => { setPhotoOnClick(false); }}>
+    <div
+      role="button"
+      key={photo.id}
+      onClick={() => { setPhotoOnClick(false); }}
+      onKeyPress={() => {}}
+      tabIndex="0"
+    >
       <Modal
         title="photo"
         content={(
           <img
-            style={{width: "650px"}}
+            style={{ width: '650px' }}
             src={photo.url}
             alt="productPhoto"
           />
@@ -33,5 +40,11 @@ const ReviewPhotoEntry = ({ photo, setPhotoOnClick, photoOnClick }) => (
     </div>
   </Photos>
 );
+
+ReviewPhotoEntry.propTypes = {
+  photo: PropTypes.instanceOf(Object).isRequired,
+  setPhotoOnClick: PropTypes.func.isRequired,
+  photoOnClick: PropTypes.bool.isRequired,
+};
 
 export default ReviewPhotoEntry;
