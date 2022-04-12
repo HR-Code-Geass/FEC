@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Sort = styled.div`
@@ -26,5 +27,10 @@ const ReviewSort = ({ changeSort, totalCount }) => (
     </Sort>
   </div>
 );
+
+ReviewSort.propTypes = {
+  changeSort: PropTypes.func.isRequired,
+  totalCount: PropTypes.number.isRequired,
+};
 
 export default ReviewSort;

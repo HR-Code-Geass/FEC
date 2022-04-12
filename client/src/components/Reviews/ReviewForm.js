@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
-// import dotenv from 'dotenv';
 import Modal from './ReviewModal';
 
 const ReviewFormUl = styled.ul`
@@ -9,7 +9,7 @@ const ReviewFormUl = styled.ul`
   padding-left: 2px
 `;
 
-const Sign = styled.p`
+const Sign = styled.div`
   text-align: right;
   color: red;
   margin: 0;
@@ -38,7 +38,6 @@ const Photos = styled.div`
 const ReviewForm = ({
   productID, writable, setisWritable, char, setDataUpdate, setSort,
 }) => {
-  const product_id = productID;
   const [summary, setSummary] = useState('');
   const [recommend, setRecommend] = useState('');
   const [rating, setRating] = useState(0);
@@ -49,22 +48,12 @@ const ReviewForm = ({
   const [characteristics, setCharacteristics] = useState({});
   const [selectPhoto, setSelectPhoto] = useState([]);
   const [isupload, setisUpload] = useState(false);
-  const [photofile, setphotofile] = useState([]);
-
-  const [sign, setSign] = useState({
-    top: '',
-    star: 'Unselected',
-    body: 'Minimum required character left: [50]',
-    email: '',
-    summary: 'Can not be empty',
-    recommend: 'Unselected',
-    size: 'Unselected',
-    width: 'Unselected',
-    comfort: 'Unselected',
-    quality: 'Unselected',
-    length: 'Unselected',
-    fit: 'Unselected',
-  });
+  const [topSign, setTopSign] = useState('');
+  const [starSign, setStarSign] = useState('Unselected');
+  const [bodySign, setBodySign] = useState('Minimum required character left: [50]');
+  const [emailSign, setEmailSign] = useState('');
+  const summarySign = ('Can not be empty');
+  const recommendSign = ('Unselected');
 
   const handleSubmit = () => {
     const data = {
@@ -83,10 +72,7 @@ const ReviewForm = ({
         .then((res) => {
           setDataUpdate(res);
           setSort('newest');
-          setSign((prev) => {
-            prev.top = 'Your Reviews is posted!';
-            return prev;
-          });
+          setTopSign('Your Review is posted!');
           setisWritable(false);
         })
         .catch();
@@ -96,40 +82,39 @@ const ReviewForm = ({
     setisUpload(true);
     selectPhoto.forEach((file) => {
       const fd = new FormData();
-      fd.append('image', file, file.name);
-      axios.post('https://api.imgbb.com/1/upload?key=cda55cf36d268bb4dcd2a2841ea5dde5', fd)
-        .then((res) => { console.log(res); setPhotos((prev) => [...prev, res.data.data.url]); })
+      fd.append('image', file);
+      axios.post('/photo', fd, { headers: { 'content-Type': 'multipart/form-data' } })
+        .then((res) => console.log(res))
         .catch();
+      // setPhotos((prev) => [...prev, res.data.data.url]); })
     });
   };
 
   const content = (
     <div>
       <h2>About the [PRODUCT NAME]</h2>
-      <Sign>{sign.top}</Sign>
+      <Sign>{topSign}</Sign>
       <ReviewFormUl>
         <li>
           Overall Rating
           {' '}
-          <Sign>{sign.star}</Sign>
+          <Sign>{starSign}</Sign>
           <div className="stars">
             <form
               action=""
               onChange={(e) => {
-                setRating(e.target.value); setSign((prev) => {
-                  if (e.target.value === '5') {
-                    prev.star = <a style={{ color: 'green', margin: '0' }}>Great</a>;
-                  } else if (e.target.value === '4') {
-                    prev.star = <a style={{ color: 'green', margin: '0' }}>Good</a>;
-                  } else if (e.target.value === '3') {
-                    prev.star = <a style={{ color: 'green', margin: '0' }}>Average</a>;
-                  } else if (e.target.value === '2') {
-                    prev.star = <a style={{ color: 'green', margin: '0' }}>Fair</a>;
-                  } else {
-                    prev.star = <a style={{ color: 'green', margin: '0' }}>Poor</a>;
-                  }
-                  return prev;
-                });
+                setRating(e.target.value);
+                if (e.target.value === '5') {
+                  setStarSign(<p style={{ color: 'green', margin: '0' }}>Great</p>);
+                } else if (e.target.value === '4') {
+                  setStarSign(<p style={{ color: 'green', margin: '0' }}>Good</p>);
+                } else if (e.target.value === '3') {
+                  setStarSign(<p style={{ color: 'green', margin: '0' }}>Average</p>);
+                } else if (e.target.value === '2') {
+                  setStarSign(<p style={{ color: 'green', margin: '0' }}>Fair</p>);
+                } else {
+                  setStarSign(<p style={{ color: 'green', margin: '0' }}>Poor</p>);
+                }
               }}
             >
               <input className="star star-5" id="star-5" type="radio" name="star" value="5" />
@@ -157,7 +142,7 @@ const ReviewForm = ({
         </li>
         <li>
           Do you recommend this product?
-          <Sign className={(recommend.length !== 0) ? 'hidden' : ''}>{sign.recommend}</Sign>
+          {recommend.length === 0 ? <Sign>{recommendSign}</Sign> : ''}
           <form onChange={(e) => { setRecommend(e.target.value); }}>
             <input type="radio" name="recommendation" value="true" />
             Yes
@@ -180,11 +165,9 @@ const ReviewForm = ({
           <tbody
             className={(!char.Size) ? 'hidden' : ''}
             onChange={(e) => {
-              setCharacteristics((prev) => {
-                const sizeID = (char.Size.id).toString();
-                prev[sizeID] = Number(e.target.value);
-                return prev;
-              });
+              setCharacteristics((prev) => (
+                { ...prev, [char.Size.id]: Number(e.target.value) }
+              ));
             }}
           >
             <tr>
@@ -219,11 +202,9 @@ const ReviewForm = ({
           <tbody
             className={(!char.Width) ? 'hidden' : ''}
             onChange={(e) => {
-              setCharacteristics((prev) => {
-                const widthID = (char.Width.id).toString();
-                prev[widthID] = Number(e.target.value);
-                return prev;
-              });
+              setCharacteristics((prev) => (
+                { ...prev, [char.Width.id]: Number(e.target.value) }
+              ));
             }}
           >
             <tr>
@@ -258,22 +239,15 @@ const ReviewForm = ({
           <tbody
             className={(!char.Comfort) ? 'hidden' : ''}
             onChange={(e) => {
-              setCharacteristics((prev) => {
-                const qualityID = (char.Comfort.id).toString();
-                prev[qualityID] = Number(e.target.value);
-                return prev;
-              });
-              setSign((prev) => {
-                prev.comfort = '';
-                return prev;
-              });
+              setCharacteristics((prev) => (
+                { ...prev, [char.Comfort.id]: Number(e.target.value) }
+              ));
             }}
           >
             <tr>
               <CharTd>
                 <b>Comfort</b>
                 <br />
-                {/* <Sign>{sign.comfort}</Sign> */}
               </CharTd>
               <CharTd>
                 <input type="radio" name="comfort" value="1" />
@@ -305,11 +279,8 @@ const ReviewForm = ({
           <tbody
             className={(!char.Quality) ? 'hidden' : ''}
             onChange={(e) => {
-              setCharacteristics((prev) => {
-                const qualityID = (char.Quality.id).toString();
-                prev[qualityID] = Number(e.target.value);
-                return prev;
-              });
+              setCharacteristics((prev) => (
+                { ...prev, [char.Quality.id]: Number(e.target.value) }));
             }}
           >
             <tr>
@@ -344,11 +315,9 @@ const ReviewForm = ({
           <tbody
             className={(!char.Length) ? 'hidden' : ''}
             onChange={(e) => {
-              setCharacteristics((prev) => {
-                const lengthID = (char.Length.id).toString();
-                prev[lengthID] = Number(e.target.value);
-                return prev;
-              });
+              setCharacteristics((prev) => (
+                { ...prev, [char.Length.id]: Number(e.target.value) }
+              ));
             }}
           >
             <tr>
@@ -385,11 +354,8 @@ const ReviewForm = ({
           <tbody
             className={(!char.Fit) ? 'hidden' : ''}
             onChange={(e) => {
-              setCharacteristics((prev) => {
-                const fitID = (char.Fit.id).toString();
-                prev[fitID] = Number(e.target.value);
-                return prev;
-              });
+              setCharacteristics((prev) => (
+                { ...prev, [char.Fit.id]: Number(e.target.value) }));
             }}
           >
             <tr>
@@ -424,12 +390,12 @@ const ReviewForm = ({
         </Characteristics>
 
         <li>Review summary</li>
-        <Sign className={(summary.length !== 0) ? 'hidden' : ''}>{sign.summary}</Sign>
+        <Sign className={(summary.length !== 0) ? 'hidden' : ''}>{summarySign}</Sign>
         <li>
           <input type="text" maxLength="60" placeholder="Example: Best purchase ever!" style={{ width: '90%' }} onChange={(e) => setSummary(e.target.value)} />
         </li>
         <li>Review body</li>
-        <Sign>{sign.body}</Sign>
+        <Sign>{bodySign}</Sign>
         <li>
           <input
             type="text"
@@ -438,15 +404,12 @@ const ReviewForm = ({
             style={{ width: '90%', height: '100px' }}
             onChange={(e) => {
               setBody(e.target.value);
-              setSign((prev) => {
-                if (e.target.value.length < 50) {
-                  const remainTextNum = 50 - e.target.value.length;
-                  prev.body = `Minimum required character left: [${remainTextNum}]`;
-                } else {
-                  prev.body = <a style={{ color: 'green', margin: '0' }}>Minimum reached</a>;
-                }
-                return prev;
-              });
+              if (e.target.value.length < 50) {
+                const remainTextNum = 50 - e.target.value.length;
+                setBodySign(`Minimum required character left: [${remainTextNum}]`);
+              } else {
+                setBodySign(<p style={{ color: 'green', margin: '0' }}>Minimum reached</p>);
+              }
             }}
           />
         </li>
@@ -463,14 +426,27 @@ const ReviewForm = ({
                 setSelectPhoto((prev) => [...prev, (e.target.files[0])]);
               }}
             />
-            <button><label htmlFor="image_input">Choose Photos</label></button>
+            <button type="button">
+              <label htmlFor="image_input">
+                Choose Photos
+              </label>
+            </button>
 
           </div>
           <Photos>
             {selectPhoto.map((photo) => (
               <div style={{ position: 'relative' }}>
-                <button className={isupload ? 'hidden' : ''} style={{ position: 'absolute', right: '0' }} onClick={() => { setSelectPhoto(selectPhoto.filter((item) => item !== photo)); }}>X</button>
+                <button
+                  type="button"
+                  className={isupload ? 'hidden' : ''}
+                  style={{ position: 'absolute', right: '0' }}
+                  onClick={() => { setSelectPhoto(selectPhoto.filter((item) => item !== photo)); }}
+                >
+                  X
+
+                </button>
                 <img
+                  alt="product"
                   style={{ width: '120px' }}
                   src={URL.createObjectURL(photo)}
                 />
@@ -479,12 +455,18 @@ const ReviewForm = ({
             ))}
 
           </Photos>
-          <button className={isupload ? 'hidden' : ''} onClick={() => handleUpload()}>Upload</button>
+          <button
+            type="button"
+            className={isupload ? 'hidden' : ''}
+            onClick={() => handleUpload()}
+          >
+            Upload
+          </button>
 
         </li>
 
         <li>What is your nickname</li>
-        <Sign className={(name.length !== 0) ? 'hidden' : ''}>{sign.summary}</Sign>
+        <Sign className={(name.length !== 0) ? 'hidden' : ''}>{summarySign}</Sign>
         <input type="text" maxLength="60" placeholder="Example: jackson11!" style={{ width: '90%' }} onChange={(e) => setName(e.target.value)} />
         <li>
           <p style={{
@@ -495,7 +477,7 @@ const ReviewForm = ({
           </p>
         </li>
         <li>Your email</li>
-        <Sign><i>{sign.email}</i></Sign>
+        <Sign><i>{emailSign}</i></Sign>
         <li>
           <input
             type="email"
@@ -503,14 +485,11 @@ const ReviewForm = ({
             style={{ width: '90%' }}
             onChange={(e) => {
               setEmail(e.target.value);
-              setSign((prev) => {
-                if ((!e.target.value.includes('@')) || (!e.target.value.includes('.'))) {
-                  prev.email = 'Not a valid email';
-                } else {
-                  prev.email = '';
-                }
-                return prev;
-              });
+              if ((!e.target.value.includes('@')) || (!e.target.value.includes('.'))) {
+                setEmailSign('Not a valid email');
+              } else {
+                setEmailSign('');
+              }
             }}
           />
 
@@ -538,6 +517,15 @@ const ReviewForm = ({
       <Modal title="Write Your Review" content={content} onClose={setisWritable} close={writable} />
     </div>
   );
+};
+
+ReviewForm.propTypes = {
+  productID: PropTypes.number.isRequired,
+  writable: PropTypes.string.isRequired,
+  setisWritable: PropTypes.func.isRequired,
+  char: PropTypes.instanceOf(Object).isRequired,
+  setDataUpdate: PropTypes.func.isRequired,
+  setSort: PropTypes.func.isRequired,
 };
 
 export default ReviewForm;
