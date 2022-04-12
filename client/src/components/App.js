@@ -44,7 +44,7 @@ function App() {
           <Overview theme={theme} product={product} />
           {/* <RelatedItems /> */}
           <Questions />
-          <Reviews />
+          <Reviews productID={productId} />
         </Container>
       </ThemeProvider>
     </div>
