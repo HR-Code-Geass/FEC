@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import QASearchIcon from '../../assets/qasearchicon.js';
 
 const QuestionInput = styled.input`
-  width: 100%;
+  width: 90%;
   border-radius: 50px;
   border-style: none;
   border: 1px solid black;
@@ -30,7 +29,6 @@ const QuestionSearch = ({ setQuestionFilter }) => {
 
   return (
     <div>
-      <QASearchIcon />
       <form onSubmit={handleFormSubmit}>
         <QuestionInput
           type="text"

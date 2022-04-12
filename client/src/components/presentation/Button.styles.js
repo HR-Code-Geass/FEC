@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  color: black;
+  background: #3C3C3C;
+  color: white;
   border-radius: 50px;
   margin: 0 1em;
   padding: 0.75em 2em;
   border-style: none;
   border: 2px solid #333333;
   font-family: 'Poppins', sans-serif;
+
+  &:hover {
+  background-color: black;
+  cursor: pointer;
+  };
 
 `;
 

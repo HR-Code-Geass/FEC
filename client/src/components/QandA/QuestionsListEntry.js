@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
+import { ChevronDownIcon } from '@heroicons/react/solid';
 import QuestionsListEntryAnswer from './QuestionsListEntryAnswer';
 import AddAnswer from './AddAnswer';
 
 const Button = styled.button`
-  background: transparent;
-  color: white;
-  border-radius: 3px;
-  background-color: #112D4E;
+  display: flex;
+  color: black;
   margin: 0 1em;
-  padding: 0.25em 1em;
+  padding: 0.75em 2em;
+  background: none;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
 `;
 
 const UnstyledButton = styled.button`
@@ -71,6 +75,7 @@ const QuestionsListEntry = ({ question, productID }) => {
     if (answers.length > displayLimit) {
       return (
         <Button type="button" onClick={() => setDisplayLimit(Number.POSITIVE_INFINITY)}>
+          <ChevronDownIcon style={{ width: '20px' }} />
           SEE MORE ANSWERS
         </Button>
       );

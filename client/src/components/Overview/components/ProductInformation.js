@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import StarBar from '../../StarBar';
 
 const ProductHeader = styled.div`
 font-size: 24px;
 font-weight: 400;
-margin-bottom: 50px;
 display: flex;
 justify-content: space-between;
 `;
@@ -19,6 +19,19 @@ color: #747571;
   color: black;
   cursor: pointer;
   };
+`;
+
+const Ratings = styled.div`
+display: flex;
+margin-bottom: 50px;
+align-items: center;
+`;
+
+const ReadAllReviews = styled.a`
+text-decoration: none;
+margin-left: 10px;
+font-size: 12px;
+color: #747571;
 `;
 
 function ProductInformation({ styles, product, currentStyleIndex }) {
@@ -43,6 +56,10 @@ function ProductInformation({ styles, product, currentStyleIndex }) {
           ? `$${styles?.[currentStyleIndex]?.sale_price}`
           : null}
       </ProductHeader>
+      <Ratings>
+        <StarBar rate={5} style={{ height: '10px' }} />
+        <ReadAllReviews href="#reviews">Read all reviews</ReadAllReviews>
+      </Ratings>
     </>
   );
 }

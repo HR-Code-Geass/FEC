@@ -58,6 +58,10 @@
   z-index: 2;
 }
 
+.dark-mode-toggle:focus {
+  transform: translateX(20px)
+}
+
 
 .size-selector {
   display: flex;

@@ -16,6 +16,7 @@ width: 100%;
   background-color: black;
   cursor: pointer;
   };
+
 `;
 
 const SizeBtn = styled.div`
@@ -96,7 +97,7 @@ function Cart({ styles, currentStyleIndex }) {
         {[...Array(Math.min(cart.quantity, 15)).keys()]
           .map((i) => <option value={i + 1} key={i}>{i + 1}</option>)}
       </Quantity>
-      <AddToCartBtn onClick={addToCart}>Add to Cart</AddToCartBtn>
+      <AddToCartBtn className="add-to-cart-btn" onClick={addToCart}>Add to Cart</AddToCartBtn>
 
     </div>
   );

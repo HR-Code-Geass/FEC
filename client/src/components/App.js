@@ -41,7 +41,7 @@ function App() {
         <GlobalStyles />
         <Navbar>Threads</Navbar>
         <Container>
-          <Overview product={product} />
+          <Overview theme={theme} product={product} />
           {/* <RelatedItems /> */}
           <Questions />
           <Reviews />

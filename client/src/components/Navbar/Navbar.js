@@ -10,9 +10,11 @@ import Search from '../../assets/search';
 
 function Navbar() {
   const [theme, setTheme] = useState('light');
+  const [toggle, setToggle] = useState({});
 
   const themeToggler = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
+    setToggle(theme === 'light' ? { transform: 'translateX(-20px)', transition: 'transform 0.3s ease-in-out' } : { transform: 'translateX(0px)', transition: 'transform 0.3s ease-in-out' });
   };
 
   return (
@@ -22,11 +24,11 @@ function Navbar() {
         <div className="navbar">
           <h1 className="brand">Threads</h1>
           <div className="nav-side-btns">
-            <Search />
+            <Search className="search" />
             <Account />
             <Cart />
             <div className="dark-mode-btn" onClick={themeToggler} aria-hidden="true">
-              <div className="dark-mode-toggle" />
+              <div className="dark-mode-toggle" style={toggle} />
             </div>
           </div>
         </div>

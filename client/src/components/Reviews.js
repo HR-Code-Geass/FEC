@@ -113,7 +113,7 @@ const Reviews = ({ productID }) => {
     </div>
   ));
   return (
-    <div>
+    <div id="reviews">
       Ratings and Reviews
       <RatingAndReview>
         <RatingBreakdown
@@ -156,7 +156,7 @@ const Reviews = ({ productID }) => {
               <tbody>
                 <tr>
                   <td colSpan="2">
-                  {reviewsData.length === 0 ? <div style={{position: 'relative', top: '-46%', left: '80%'}}><h2>There is no review yet</h2></div> : reviews}
+                    {reviewsData.length === 0 ? <div style={{ position: 'relative', top: '-46%', left: '80%' }}><h2>There is no review yet</h2></div> : reviews}
                   </td>
                 </tr>
               </tbody>

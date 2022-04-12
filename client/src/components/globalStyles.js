@@ -7,4 +7,6 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     transition: all 0.20s linear;
   }
-  `;
+`;
+
+export const Junk = {};
