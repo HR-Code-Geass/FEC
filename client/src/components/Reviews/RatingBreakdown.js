@@ -8,7 +8,7 @@ const RateNum = styled.h1`
 `;
 
 const RatingDiv = styled.div`
-  padding-right: 100px
+  padding: 20px
 `;
 
 const RatingUser = styled.div`
@@ -101,7 +101,7 @@ const RatingBreakdown = ({
   return (
     <RatingDiv>
       <RateNum>{aveRate}</RateNum>
-      <StarBar rate={aveRate} />
+      <StarBar rate={Number(aveRate)} />
       <h4>
         {recomPer}
         % of reviews recommend this product
@@ -367,7 +367,7 @@ const RatingBreakdown = ({
 RatingBreakdown.propTypes = {
   data: PropTypes.instanceOf(Object).isRequired,
   setReviewsData: PropTypes.func.isRequired,
-  aveRate: PropTypes.number.isRequired,
+  aveRate: PropTypes.string.isRequired,
   recomPer: PropTypes.number.isRequired,
   star: PropTypes.instanceOf(Object).isRequired,
   char: PropTypes.instanceOf(Object).isRequired,

@@ -4,10 +4,9 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import Navbar from './Navbar/Navbar.js';
 import Overview from './Overview/Overview.js';
-import Reviews from './Reviews.js';
+import Reviews from './Reviews/Reviews.js';
 import Questions from './QandA/Questions';
 import RelatedItems from './RelatedItems.js';
-
 
 import { GlobalStyles } from './globalStyles.js';
 import { lightTheme, darkTheme } from './Themes';
@@ -24,6 +23,8 @@ function App() {
   const [theme, setTheme] = useState('light');
   const [productId, setProductId] = useState(65635);
   const [product, setProduct] = useState();
+  const [aveRate, setAveRate] = useState('');
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     axios.get(`/products/${productId}`)
@@ -44,7 +45,13 @@ function App() {
           <Overview product={product} />
           <RelatedItems />
           <Questions />
-          <Reviews />
+          <Reviews
+            productID={productId}
+            setAveRate={setAveRate}
+            setTotalCount={setTotalCount}
+            aveRate={aveRate}
+            totalCount={totalCount}
+          />
         </Container>
       </ThemeProvider>
     </div>
