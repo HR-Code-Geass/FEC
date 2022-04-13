@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import Navbar from './Navbar/Navbar';
 import Overview from './Overview/Overview';
-import Reviews from './Reviews';
+import Reviews from './Reviews/Reviews';
 import Questions from './QandA/Questions';
 // import RelatedItems from './RelatedItems';
 
@@ -24,6 +24,8 @@ function App() {
   const [theme] = useState('light');
   const [productId] = useState(65635);
   const [product, setProduct] = useState({});
+  const [aveRate, setAveRate] = useState('');
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     axios.get(`/products/${productId}`)
@@ -44,7 +46,13 @@ function App() {
           <Overview theme={theme} product={product} />
           {/* <RelatedItems /> */}
           <Questions />
-          <Reviews productID={productId} />
+          <Reviews
+            productID={productId}
+            setAveRate={setAveRate}
+            setTotalCount={setTotalCount}
+            aveRate={aveRate}
+            totalCount={totalCount}
+          />
         </Container>
       </ThemeProvider>
     </div>

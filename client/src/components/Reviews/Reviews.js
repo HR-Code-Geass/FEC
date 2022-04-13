@@ -5,14 +5,13 @@ import styled from 'styled-components';
 import {
   PlusIcon,
 } from '@heroicons/react/solid';
-import ReviewListEntry from './Reviews/ReviewListEntry';
-import ReviewForm from './Reviews/ReviewForm';
-import ReviewSearch from './Reviews/ReviewSearch';
-import ReviewSort from './Reviews/ReviewSort';
-import RatingBreakdown from './Reviews/RatingBreakdown';
+import ReviewListEntry from './ReviewListEntry';
+import ReviewForm from './ReviewForm';
+import ReviewSearch from './ReviewSearch';
+import ReviewSort from './ReviewSort';
+import RatingBreakdown from './RatingBreakdown';
 
 const RatingAndReview = styled.section`
-  padding: 4em;
   display: flex;
   justify-content: flex-start;
 `;
@@ -30,18 +29,13 @@ const ReviewDiv = styled.div`
   overflow: auto;
 `;
 
-const Reviews = ({ productID }) => {
-  // productID = productID || 65635;
-  // 65635 meta and reviews count are not the same
-  // 65632 for testing the response
-  // 65640 for testing the add reviews button
-  // 65634 for testing photos
+const Reviews = ({
+  productID, setAveRate, setTotalCount, aveRate, totalCount,
+}) => {
   const [data, setData] = useState([]);
   const [reviewsData, setReviewsData] = useState([]);
   const [dataUpdate, setDataUpdate] = useState('');
   const [sort, setSort] = useState('relevant');
-  const [totalCount, setTotalCount] = useState(0);
-  const [aveRate, setAveRate] = useState(0);
   const [recomPer, setRecomPer] = useState(0);
   const [char, setChar] = useState({});
   const [star5, setStar5] = useState(0);
@@ -113,13 +107,12 @@ const Reviews = ({ productID }) => {
     </div>
   ));
   return (
-    <div id="reviews">
-      Ratings and Reviews
-      <RatingAndReview>
+    <RatingAndReview>
+      <div style={{ width: '30%' }}>
         <RatingBreakdown
           data={data}
           setReviewsData={setReviewsData}
-          aveRate={Number(aveRate)}
+          aveRate={aveRate}
           recomPer={recomPer}
           star={{
             star1,
@@ -137,58 +130,61 @@ const Reviews = ({ productID }) => {
             fit,
           }}
         />
-        <div style={{ width: '100%' }}>
-          <ReviewSearch data={data} setReviewsData={setReviewsData} />
-          <ReviewSort changeSort={changeSort} totalCount={totalCount} />
-          <div>
-            <ReviewForm
-              productID={productID}
-              setisWritable={setisWritable}
-              writable={writable}
-              char={char}
-              setDataUpdate={setDataUpdate}
-              setSort={setSort}
-            />
-          </div>
-          <ReviewDiv>
-
-            <table style={{ height: '100vh' }}>
-              <tbody>
-                <tr>
-                  <td colSpan="2">
-                    {reviewsData.length === 0
-                      ? (
-                        <div
-                          style={{ position: 'relative', top: '-46%', left: '80%' }}
-                        >
-                          <h2>There is no review yet</h2>
-
-                        </div>
-                      ) : reviews}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </ReviewDiv>
-          <Button className={((totalCount <= 2 || reviewsData.length !== 2) ? 'hidden' : '')} onClick={() => { setReviewsData(data); }}>
-            MORE REVIEWS
-          </Button>
-          <Button
-            style={(totalCount <= 2) ? collapseStyle : { }}
-            onClick={() => setisWritable(true)}
-          >
-            ADD A REVIEW
-            {' '}
-            <PlusIcon style={{ height: '13px' }} />
-          </Button>
+      </div>
+      <div style={{ width: '60%' }}>
+        <ReviewSearch data={data} setReviewsData={setReviewsData} />
+        <ReviewSort changeSort={changeSort} totalCount={totalCount} />
+        <div>
+          <ReviewForm
+            productID={productID}
+            setisWritable={setisWritable}
+            writable={writable}
+            char={char}
+            setDataUpdate={setDataUpdate}
+            setSort={setSort}
+          />
         </div>
-      </RatingAndReview>
-    </div>
+        <ReviewDiv>
+          <table>
+            <tbody>
+              <tr>
+                <td colSpan="2">
+                  {reviewsData.length === 0
+                    ? (
+                      <div
+                        style={{ position: 'relative', top: '-46%', left: '80%' }}
+                      >
+                        <h2>There is no review yet</h2>
+
+                      </div>
+                    ) : reviews}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ReviewDiv>
+        <Button className={((totalCount <= 2 || reviewsData.length !== 2) ? 'hidden' : '')} onClick={() => { setReviewsData(data); }}>
+          MORE REVIEWS
+        </Button>
+        <Button
+          style={(totalCount <= 2) ? collapseStyle : { }}
+          onClick={() => setisWritable(true)}
+        >
+          ADD A REVIEW
+          {' '}
+          <PlusIcon style={{ height: '13px' }} />
+        </Button>
+      </div>
+    </RatingAndReview>
   );
 };
 
 Reviews.propTypes = {
   productID: PropTypes.number.isRequired,
+  setAveRate: PropTypes.func.isRequired,
+  setTotalCount: PropTypes.func.isRequired,
+  aveRate: PropTypes.string.isRequired,
+  totalCount: PropTypes.number.isRequired,
 };
 
 export default Reviews;

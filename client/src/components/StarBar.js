@@ -1,28 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Bar = styled.div`
   background-color: #F9F7F7;
-  width: 101px;
+  width: 100px;
   height: 25px;
+  position: relative
 `;
 
 const InsideBar = styled.div`
   background-color: black;
-  height: 23px;
+  margin-left: 1px;
+  margin-right: 1px;
+  height: 100%;
 `;
-
-// pass in the rate as the prop
 
 const StarBar = ({ rate }) => {
   const percentage = `${(rate / 5) * 100}%`;
   return (
-    <div>
-      <Bar style={{ position: 'relative', width: '100px' }}>
-        <InsideBar style={{ width: percentage }} />
-        <img className="star-scale" src="https://upload.cc/i1/2022/04/05/pgZqAw.png" alt="starbar" style={{ width: '100%', position: 'absolute', top: '0' }} />
-      </Bar>
-    </div>
+    <Bar>
+      <InsideBar style={{
+        width: percentage,
+      }}
+      />
+      <img
+        className="star-scale"
+        src="https://i.ibb.co/rZpmkb3/5-star.png"
+        alt="starbar"
+        style={{
+          width: '101%', position: 'absolute', top: '-3%',
+        }}
+      />
+    </Bar>
   );
 };
+
+StarBar.propTypes = {
+  rate: PropTypes.number.isRequired,
+};
+
 export default StarBar;
