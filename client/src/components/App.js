@@ -39,7 +39,7 @@ function App() {
     <div>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
-        <Navbar>Threads</Navbar>
+        <Navbar theme={theme}>Threads</Navbar>
         <Container>
           <Overview theme={theme} product={product} />
           {/* <RelatedItems /> */}

@@ -7,7 +7,7 @@ import StyleSelector from './components/StyleSelector';
 import Cart from './components/Cart';
 import ImageGallery from './components/ImageGallery';
 
-function Overview({ product }) {
+function Overview({ product, theme }) {
   const [styles, setStyles] = useState({});
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
 
@@ -48,7 +48,7 @@ function Overview({ product }) {
           selectStyle={selectStyle}
         />
 
-        <Cart styles={styles} currentStyleIndex={currentStyleIndex} />
+        <Cart styles={styles} theme={theme} currentStyleIndex={currentStyleIndex} />
         {product?.description}
       </div>
     </div>
@@ -57,6 +57,7 @@ function Overview({ product }) {
 
 Overview.propTypes = {
   product: PropTypes.instanceOf(Object).isRequired,
+  theme: PropTypes.string.isRequired,
 };
 
 export default Overview;
