@@ -24,17 +24,49 @@ display: flex;
 `;
 
 const Button = styled.button`
-  height: 60px;
-  padding: 20px;
-  background-color: #112D4E;
-  color: #F9F7F7;
-  margin: 10px;
+  background: #3C3C3C;
+  color: white;
+  border-radius: 50px;
+  margin: 0 1em;
+  margin-bottom: 10px;
+  padding: 0.5em 2em;
+  border-style: none;
+  border: 2px solid #333333;
+  font-family: 'Poppins', sans-serif;
+  width: 200px;
+  font-size: 16px;
+
+  &:hover {
+  background-color: black;
+  cursor: pointer;
+  };
+`;
+
+const MoreReviewsBtn = styled.div`
+  border-radius: 50px;
+  margin: 0 1em;
+  margin-bottom: 10px;
+  padding: 0.5em 1.5em;
+  border-style: none;
+  border: 2px solid #333333;
+  font-family: 'Poppins', sans-serif;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+  background-color: black;
+  color: white;
+  background: #3C3C3C;
+  cursor: pointer;
+  };
 `;
 
 const ReviewDiv = styled.div`
   height: 100vh;
   width: 100%;
   overflow: auto;
+  margin-bottom: 20px;
 `;
 
 const Reviews = ({
@@ -171,9 +203,9 @@ const Reviews = ({
           </tbody>
         </table>
       </ReviewDiv>
-      <Button className={((totalCount <= 2 || reviewsData.length !== 2) ? 'hidden' : '')} onClick={() => { setReviewsData(data); setMoreReviewOnClick(true); }}>
+      <MoreReviewsBtn className={((totalCount <= 2 || reviewsData.length !== 2) ? 'hidden' : '')} onClick={() => { setReviewsData(data); setMoreReviewOnClick(true); }}>
         MORE REVIEWS
-      </Button>
+      </MoreReviewsBtn>
       <Button
         style={(totalCount <= 2) ? collapseStyle : { }}
         onClick={() => setisWritable(true)}
