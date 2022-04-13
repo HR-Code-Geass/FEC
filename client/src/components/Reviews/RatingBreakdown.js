@@ -8,7 +8,15 @@ const RateNum = styled.h1`
 `;
 
 const RatingDiv = styled.div`
-  padding: 20px
+  display: flex;
+`;
+
+const LeftDiv = styled.div`
+width: 50%;
+`;
+
+const RightDiv = styled.div`
+width: 50%;
 `;
 
 const RatingUser = styled.div`
@@ -100,265 +108,269 @@ const RatingBreakdown = ({
   };
   return (
     <RatingDiv>
-      <RateNum>{aveRate}</RateNum>
-      <StarBar rate={Number(aveRate)} />
-      <h4>
-        {recomPer}
-        % of reviews recommend this product
-      </h4>
-      <br />
-      <RatingUser>
-        <ScaleDiv>
-          <StarButton
-            type="button"
-            className="starScale"
-            style={(star5onClick) ? { color: 'red' } : {}}
-            onClick={() => (
-              star5onClick ? (setStar5onClick(false),
-              filter.splice(filter.indexOf(5), 1), filterStar()) : (setStar5onClick(true),
-              filter.unshift(5), filterStar())
-            )}
-          >
-            <u>5 stars</u>
-          </StarButton>
-        </ScaleDiv>
-        <Bar><InsideBar style={{ width: star.star5 }} /></Bar>
-      </RatingUser>
-      <br />
-      <RatingUser>
-        <ScaleDiv>
-          <StarButton
-            className="starScale"
-            style={(star4onClick) ? { color: 'red' } : {}}
-            onClick={() => (
-              (star4onClick) ? (setStar4onClick(false),
-              filter.splice(filter.indexOf(4), 1), filterStar()) : (setStar4onClick(true),
-              filter.unshift(4), filterStar())
-            )}
-          >
-            <u>4 stars</u>
-          </StarButton>
-
-        </ScaleDiv>
-        <Bar><InsideBar style={{ width: star.star4 }} /></Bar>
-      </RatingUser>
-      <br />
-      <RatingUser>
-        <ScaleDiv>
-          <StarButton
-            className="starScale"
-            style={(star3onClick) ? { color: 'red' } : {}}
-            onClick={() => (
-              (star3onClick) ? (setStar3onClick(false),
-              filter.splice(filter.indexOf(3), 1), filterStar()) : (setStar3onClick(true),
-              filter.unshift(3), filterStar())
-            )}
-          >
-            <u>3 stars</u>
-          </StarButton>
-
-        </ScaleDiv>
-        <Bar><InsideBar style={{ width: star.star3 }} /></Bar>
-      </RatingUser>
-      <br />
-      <RatingUser>
-        <ScaleDiv>
-          <StarButton
-            className="starScale"
-            style={(star2onClick) ? { color: 'red' } : {}}
-            onClick={() => ((
-              star2onClick) ? (setStar2onClick(false),
-              filter.splice(filter.indexOf(2), 1), filterStar()) : (setStar2onClick(true),
-              filter.unshift(2), filterStar())
-            )}
-          >
-            <u>2 stars</u>
-          </StarButton>
-
-        </ScaleDiv>
-        <Bar><InsideBar style={{ width: star.star2 }} /></Bar>
-      </RatingUser>
-      <br />
-      <RatingUser>
-        <ScaleDiv>
-          <StarButton
-            type="button"
-            className="starScale"
-            style={(star1onClick) ? { color: 'red' } : {}}
-            onClick={() => (
-              (star1onClick) ? (setStar1onClick(false),
-              filter.splice(filter.indexOf(1), 1), filterStar(filter)) : (setStar1onClick(true),
-              filter.unshift(1), filterStar(filter))
-            )}
-          >
-            <u>1 stars</u>
-          </StarButton>
-        </ScaleDiv>
-        <Bar><InsideBar style={{ width: star.star1 }} /></Bar>
-      </RatingUser>
-      <StarButton
-        onClick={() => {
-          setReviewsData(data); setStar1onClick(false);
-          setStar2onClick(false); setStar3onClick(false);
-          setStar4onClick(false); setStar5onClick(false);
-          setfilter([]);
-        }}
-      >
-        <u>no filter</u>
-
-      </StarButton>
-
-      <br />
-      <div>
-        <div className={(!char.size) ? 'hidden' : ''}>
-          Size
-          <CharBar>
-            <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.size / 5) * 100}%`,
-            }}
-            >
-              <Triangle />
-            </div>
-            <CharScaleDiv>
-              <CharInsideBar />
-              Too small
-            </CharScaleDiv>
-            <CharScaleDiv style={{ textAlign: 'center' }}>
-              <CharInsideBar />
-              Prefect
-            </CharScaleDiv>
-            <CharScaleDiv style={{ textAlign: 'right' }}>
-              <CharInsideBar />
-              Too Large
-            </CharScaleDiv>
-          </CharBar>
-        </div>
+      <LeftDiv>
+        <RateNum>{aveRate}</RateNum>
+        <StarBar rate={Number(aveRate)} />
+        <h4>
+          {recomPer}
+          % of reviews recommend this product
+        </h4>
         <br />
-        <div className={(!char.width) ? 'hidden' : ''}>
-          Width
-          <CharBar>
-            <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.width / 5) * 100}%`,
-            }}
+        <RatingUser>
+          <ScaleDiv>
+            <StarButton
+              type="button"
+              className="starScale"
+              style={(star5onClick) ? { color: 'red' } : {}}
+              onClick={() => (
+                star5onClick ? (setStar5onClick(false),
+                filter.splice(filter.indexOf(5), 1), filterStar()) : (setStar5onClick(true),
+                filter.unshift(5), filterStar())
+              )}
             >
-              <Triangle />
-            </div>
-            <CharScaleDiv>
-              <CharInsideBar />
-              Too tight
-            </CharScaleDiv>
-            <CharScaleDiv style={{ textAlign: 'center' }}>
-              <CharInsideBar />
-              Prefect
-            </CharScaleDiv>
-            <CharScaleDiv style={{ textAlign: 'right' }}>
-              <CharInsideBar />
-              Too wide
-            </CharScaleDiv>
-          </CharBar>
-        </div>
+              <u>5 stars</u>
+            </StarButton>
+          </ScaleDiv>
+          <Bar><InsideBar style={{ width: star.star5 }} /></Bar>
+        </RatingUser>
         <br />
-        <div className={(!char.comfort) ? 'hidden' : ''}>
-          Comfort
+        <RatingUser>
+          <ScaleDiv>
+            <StarButton
+              className="starScale"
+              style={(star4onClick) ? { color: 'red' } : {}}
+              onClick={() => (
+                (star4onClick) ? (setStar4onClick(false),
+                filter.splice(filter.indexOf(4), 1), filterStar()) : (setStar4onClick(true),
+                filter.unshift(4), filterStar())
+              )}
+            >
+              <u>4 stars</u>
+            </StarButton>
+
+          </ScaleDiv>
+          <Bar><InsideBar style={{ width: star.star4 }} /></Bar>
+        </RatingUser>
+        <br />
+        <RatingUser>
+          <ScaleDiv>
+            <StarButton
+              className="starScale"
+              style={(star3onClick) ? { color: 'red' } : {}}
+              onClick={() => (
+                (star3onClick) ? (setStar3onClick(false),
+                filter.splice(filter.indexOf(3), 1), filterStar()) : (setStar3onClick(true),
+                filter.unshift(3), filterStar())
+              )}
+            >
+              <u>3 stars</u>
+            </StarButton>
+
+          </ScaleDiv>
+          <Bar><InsideBar style={{ width: star.star3 }} /></Bar>
+        </RatingUser>
+        <br />
+        <RatingUser>
+          <ScaleDiv>
+            <StarButton
+              className="starScale"
+              style={(star2onClick) ? { color: 'red' } : {}}
+              onClick={() => ((
+                star2onClick) ? (setStar2onClick(false),
+                filter.splice(filter.indexOf(2), 1), filterStar()) : (setStar2onClick(true),
+                filter.unshift(2), filterStar())
+              )}
+            >
+              <u>2 stars</u>
+            </StarButton>
+
+          </ScaleDiv>
+          <Bar><InsideBar style={{ width: star.star2 }} /></Bar>
+        </RatingUser>
+        <br />
+        <RatingUser>
+          <ScaleDiv>
+            <StarButton
+              type="button"
+              className="starScale"
+              style={(star1onClick) ? { color: 'red' } : {}}
+              onClick={() => (
+                (star1onClick) ? (setStar1onClick(false),
+                filter.splice(filter.indexOf(1), 1), filterStar(filter)) : (setStar1onClick(true),
+                filter.unshift(1), filterStar(filter))
+              )}
+            >
+              <u>1 stars</u>
+            </StarButton>
+          </ScaleDiv>
+          <Bar><InsideBar style={{ width: star.star1 }} /></Bar>
+        </RatingUser>
+        <StarButton
+          onClick={() => {
+            setReviewsData(data); setStar1onClick(false);
+            setStar2onClick(false); setStar3onClick(false);
+            setStar4onClick(false); setStar5onClick(false);
+            setfilter([]);
+          }}
+        >
+          <u>no filter</u>
+
+        </StarButton>
+
+        <br />
+      </LeftDiv>
+      <RightDiv>
+        <div>
+          <div className={(!char.size) ? 'hidden' : ''}>
+            Size
+            <CharBar>
+              <div style={{
+                transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.size / 5) * 100}%`,
+              }}
+              >
+                <Triangle />
+              </div>
+              <CharScaleDiv>
+                <CharInsideBar />
+                Too small
+              </CharScaleDiv>
+              <CharScaleDiv style={{ textAlign: 'center' }}>
+                <CharInsideBar />
+                Prefect
+              </CharScaleDiv>
+              <CharScaleDiv style={{ textAlign: 'right' }}>
+                <CharInsideBar />
+                Too Large
+              </CharScaleDiv>
+            </CharBar>
+          </div>
           <br />
-          <CharBar>
-            <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.comfort / 5) * 100}%`,
-            }}
-            >
-              <Triangle />
-            </div>
-            <CharForthScaleDiv>
-              <CharInsideBar />
-              Poor
-            </CharForthScaleDiv>
-            <CharForthScaleDiv>
-              <CharInsideBar />
-            </CharForthScaleDiv>
-            <CharForthScaleDiv>
-              <CharInsideBar />
-            </CharForthScaleDiv>
-            <CharForthScaleDiv style={{ textAlign: 'right' }}>
-              <CharInsideBar />
-              Prefect
-            </CharForthScaleDiv>
-          </CharBar>
+          <div className={(!char.width) ? 'hidden' : ''}>
+            Width
+            <CharBar>
+              <div style={{
+                transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.width / 5) * 100}%`,
+              }}
+              >
+                <Triangle />
+              </div>
+              <CharScaleDiv>
+                <CharInsideBar />
+                Too tight
+              </CharScaleDiv>
+              <CharScaleDiv style={{ textAlign: 'center' }}>
+                <CharInsideBar />
+                Prefect
+              </CharScaleDiv>
+              <CharScaleDiv style={{ textAlign: 'right' }}>
+                <CharInsideBar />
+                Too wide
+              </CharScaleDiv>
+            </CharBar>
+          </div>
+          <br />
+          <div className={(!char.comfort) ? 'hidden' : ''}>
+            Comfort
+            <br />
+            <CharBar>
+              <div style={{
+                transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.comfort / 5) * 100}%`,
+              }}
+              >
+                <Triangle />
+              </div>
+              <CharForthScaleDiv>
+                <CharInsideBar />
+                Poor
+              </CharForthScaleDiv>
+              <CharForthScaleDiv>
+                <CharInsideBar />
+              </CharForthScaleDiv>
+              <CharForthScaleDiv>
+                <CharInsideBar />
+              </CharForthScaleDiv>
+              <CharForthScaleDiv style={{ textAlign: 'right' }}>
+                <CharInsideBar />
+                Prefect
+              </CharForthScaleDiv>
+            </CharBar>
+          </div>
+          <br />
+          <div className={(!char.quality) ? 'hidden' : ''}>
+            Quality
+            <CharBar>
+              <div style={{
+                transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.quality / 5) * 100}%`,
+              }}
+              >
+                <Triangle />
+              </div>
+              <CharForthScaleDiv>
+                <CharInsideBar />
+                Poor
+              </CharForthScaleDiv>
+              <CharForthScaleDiv>
+                <CharInsideBar />
+              </CharForthScaleDiv>
+              <CharForthScaleDiv>
+                <CharInsideBar />
+              </CharForthScaleDiv>
+              <CharForthScaleDiv style={{ textAlign: 'right' }}>
+                <CharInsideBar />
+                Prefect
+              </CharForthScaleDiv>
+            </CharBar>
+          </div>
+          <br />
+          <div className={(!char.length) ? 'hidden' : ''}>
+            Length
+            <CharBar>
+              <div style={{
+                transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.quality / 5) * 100}%`,
+              }}
+              >
+                <Triangle />
+              </div>
+              <CharScaleDiv>
+                <CharInsideBar />
+                Too short
+              </CharScaleDiv>
+              <CharScaleDiv style={{ textAlign: 'center' }}>
+                <CharInsideBar />
+                Prefect
+              </CharScaleDiv>
+              <CharScaleDiv style={{ textAlign: 'right' }}>
+                <CharInsideBar />
+                Too long
+              </CharScaleDiv>
+            </CharBar>
+          </div>
+          <br />
+          <div className={(!char.fit) ? 'hidden' : ''}>
+            Fit
+            <CharBar>
+              <div style={{
+                transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.fit / 5) * 100}%`,
+              }}
+              >
+                <Triangle />
+              </div>
+              <CharScaleDiv>
+                <CharInsideBar />
+                Too small
+              </CharScaleDiv>
+              <CharScaleDiv style={{ textAlign: 'center' }}>
+                <CharInsideBar />
+                Prefect
+              </CharScaleDiv>
+              <CharScaleDiv style={{ textAlign: 'right' }}>
+                <CharInsideBar />
+                Too big
+              </CharScaleDiv>
+            </CharBar>
+          </div>
         </div>
-        <br />
-        <div className={(!char.quality) ? 'hidden' : ''}>
-          Quality
-          <CharBar>
-            <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.quality / 5) * 100}%`,
-            }}
-            >
-              <Triangle />
-            </div>
-            <CharForthScaleDiv>
-              <CharInsideBar />
-              Poor
-            </CharForthScaleDiv>
-            <CharForthScaleDiv>
-              <CharInsideBar />
-            </CharForthScaleDiv>
-            <CharForthScaleDiv>
-              <CharInsideBar />
-            </CharForthScaleDiv>
-            <CharForthScaleDiv style={{ textAlign: 'right' }}>
-              <CharInsideBar />
-              Prefect
-            </CharForthScaleDiv>
-          </CharBar>
-        </div>
-        <br />
-        <div className={(!char.length) ? 'hidden' : ''}>
-          Length
-          <CharBar>
-            <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.quality / 5) * 100}%`,
-            }}
-            >
-              <Triangle />
-            </div>
-            <CharScaleDiv>
-              <CharInsideBar />
-              Too short
-            </CharScaleDiv>
-            <CharScaleDiv style={{ textAlign: 'center' }}>
-              <CharInsideBar />
-              Prefect
-            </CharScaleDiv>
-            <CharScaleDiv style={{ textAlign: 'right' }}>
-              <CharInsideBar />
-              Too long
-            </CharScaleDiv>
-          </CharBar>
-        </div>
-        <br />
-        <div className={(!char.fit) ? 'hidden' : ''}>
-          Fit
-          <CharBar>
-            <div style={{
-              transform: 'translate(-50%, -5%)', width: '30px', position: 'absolute', left: `${(char.fit / 5) * 100}%`,
-            }}
-            >
-              <Triangle />
-            </div>
-            <CharScaleDiv>
-              <CharInsideBar />
-              Too small
-            </CharScaleDiv>
-            <CharScaleDiv style={{ textAlign: 'center' }}>
-              <CharInsideBar />
-              Prefect
-            </CharScaleDiv>
-            <CharScaleDiv style={{ textAlign: 'right' }}>
-              <CharInsideBar />
-              Too big
-            </CharScaleDiv>
-          </CharBar>
-        </div>
-      </div>
+      </RightDiv>
     </RatingDiv>
   );
 };
