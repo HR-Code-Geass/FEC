@@ -22,6 +22,7 @@ const QAContainer = styled.div`
   padding: 0.25em 1em;
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
 `;
 
 const ButtonContainer = styled.div`
@@ -43,6 +44,7 @@ margin-right: 20px;
 const QARightDiv = styled.div`
 display: flex;
 flex-direction: column;
+width: 100%;
 `;
 
 const Questions = () => {
@@ -103,26 +105,24 @@ const Questions = () => {
         <QARightDiv>
           {(questions.length
           && (
-          <>
-            <QuestionsList
-              questions={filteredQuestions}
-              displayLimit={questionsDisplayLimit}
-              productID={productID}
-            />
-            <ButtonContainer>
-              <MoreQuestionsButton
-                numberQuestions={numberQuestions}
-                displayLimit={questionsDisplayLimit}
-                setDisplayLimit={setQuestionsDisplayLimit}
-              />
-            </ButtonContainer>
-          </>
+          <QuestionsList
+            questions={filteredQuestions}
+            displayLimit={questionsDisplayLimit}
+            productID={productID}
+          />
           )) || null}
           {/* <ButtonContainer>
           <AskQuestion productID={productID} />
         </ButtonContainer> */}
         </QARightDiv>
       </QABody>
+      <ButtonContainer>
+        <MoreQuestionsButton
+          numberQuestions={numberQuestions}
+          displayLimit={questionsDisplayLimit}
+          setDisplayLimit={setQuestionsDisplayLimit}
+        />
+      </ButtonContainer>
     </QAContainer>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import QuestionsListEntryAnswer from './QuestionsListEntryAnswer';
 import AddAnswer from './AddAnswer';
 
@@ -81,7 +81,12 @@ const QuestionsListEntry = ({ question, productID }) => {
       );
     }
 
-    return (<Button type="button" onClick={() => setDisplayLimit(2)}>COLLAPSE ANSWERS</Button>);
+    return (
+      <Button type="button" onClick={() => setDisplayLimit(2)}>
+        <ChevronUpIcon style={{ width: '20px' }} />
+        COLLAPSE ANSWERS
+      </Button>
+    );
   };
 
   return (

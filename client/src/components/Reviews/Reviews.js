@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import {
   PlusIcon,
 } from '@heroicons/react/solid';
+import { Line } from '../presentation/Line.styles';
 import ReviewListEntry from './ReviewListEntry';
 import ReviewForm from './ReviewForm';
 import ReviewSearch from './ReviewSearch';
@@ -13,7 +14,13 @@ import RatingBreakdown from './RatingBreakdown';
 
 const RatingAndReview = styled.section`
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  width: 1000px;
+`;
+
+const RRTop = styled.div`
+display: flex;
 `;
 
 const Button = styled.button`
@@ -108,7 +115,9 @@ const Reviews = ({
   ));
   return (
     <RatingAndReview id="reviews">
-      <div style={{ width: '30%' }}>
+      <Line />
+      <h3>Ratings & Reviews</h3>
+      <RRTop>
         <RatingBreakdown
           data={data}
           setReviewsData={setReviewsData}
@@ -130,51 +139,47 @@ const Reviews = ({
             fit,
           }}
         />
-      </div>
-      <div style={{ width: '60%' }}>
-        <ReviewSearch data={data} setReviewsData={setReviewsData} />
-        <ReviewSort changeSort={changeSort} totalCount={totalCount} />
-        <div>
-          <ReviewForm
-            productID={productID}
-            setisWritable={setisWritable}
-            writable={writable}
-            char={char}
-            setDataUpdate={setDataUpdate}
-            setSort={setSort}
-          />
-        </div>
-        <ReviewDiv>
-          <table>
-            <tbody>
-              <tr>
-                <td colSpan="2">
-                  {reviewsData.length === 0
-                    ? (
-                      <div
-                        style={{ position: 'relative', top: '-46%', left: '80%' }}
-                      >
-                        <h2>There is no review yet</h2>
+      </RRTop>
+      <ReviewSearch data={data} setReviewsData={setReviewsData} />
+      <ReviewSort changeSort={changeSort} totalCount={totalCount} />
+      <ReviewForm
+        productID={productID}
+        setisWritable={setisWritable}
+        writable={writable}
+        char={char}
+        setDataUpdate={setDataUpdate}
+        setSort={setSort}
+      />
+      <ReviewDiv>
+        <table>
+          <tbody>
+            <tr>
+              <td colSpan="2">
+                {reviewsData.length === 0
+                  ? (
+                    <div
+                      style={{ position: 'relative', top: '-46%', left: '80%' }}
+                    >
+                      <h2>There is no review yet</h2>
 
-                      </div>
-                    ) : reviews}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </ReviewDiv>
-        <Button className={((totalCount <= 2 || reviewsData.length !== 2) ? 'hidden' : '')} onClick={() => { setReviewsData(data); }}>
-          MORE REVIEWS
-        </Button>
-        <Button
-          style={(totalCount <= 2) ? collapseStyle : { }}
-          onClick={() => setisWritable(true)}
-        >
-          ADD A REVIEW
-          {' '}
-          <PlusIcon style={{ height: '13px' }} />
-        </Button>
-      </div>
+                    </div>
+                  ) : reviews}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ReviewDiv>
+      <Button className={((totalCount <= 2 || reviewsData.length !== 2) ? 'hidden' : '')} onClick={() => { setReviewsData(data); }}>
+        MORE REVIEWS
+      </Button>
+      <Button
+        style={(totalCount <= 2) ? collapseStyle : { }}
+        onClick={() => setisWritable(true)}
+      >
+        ADD A REVIEW
+        {' '}
+        <PlusIcon style={{ height: '13px' }} />
+      </Button>
     </RatingAndReview>
   );
 };

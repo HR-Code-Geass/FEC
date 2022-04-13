@@ -193,7 +193,6 @@ const RatingBreakdown = ({
           >
             <u>1 stars</u>
           </StarButton>
-
         </ScaleDiv>
         <Bar><InsideBar style={{ width: star.star1 }} /></Bar>
       </RatingUser>

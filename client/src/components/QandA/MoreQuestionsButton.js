@@ -15,7 +15,7 @@ const MoreQuestionsButton = ({ numberQuestions, displayLimit, setDisplayLimit })
     ));
   };
 
-  return <Button type="button" onClick={handleButtonClick}>{buttonText}</Button>;
+  return <Button type="button" onClick={handleButtonClick} style={{ marginTop: '20px' }}>{buttonText}</Button>;
 };
 
 MoreQuestionsButton.propTypes = {
