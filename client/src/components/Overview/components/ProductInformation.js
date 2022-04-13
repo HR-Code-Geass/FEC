@@ -34,7 +34,9 @@ font-size: 12px;
 color: #747571;
 `;
 
-function ProductInformation({ styles, product, currentStyleIndex }) {
+function ProductInformation({
+  styles, product, currentStyleIndex, aveRate, totalCount,
+}) {
   if (!styles?.length) return null;
   return (
     <>
@@ -57,8 +59,12 @@ function ProductInformation({ styles, product, currentStyleIndex }) {
           : null}
       </ProductHeader>
       <Ratings>
-        <StarBar rate={5} style={{ height: '10px' }} />
-        <ReadAllReviews href="#reviews">Read all reviews</ReadAllReviews>
+        <StarBar rate={Number(aveRate)} style={{ height: '10px' }} />
+        <ReadAllReviews href="#reviews">
+          {totalCount}
+          {' '}
+          reviews
+        </ReadAllReviews>
       </Ratings>
     </>
   );
@@ -68,6 +74,8 @@ ProductInformation.propTypes = {
   styles: PropTypes.instanceOf(Object).isRequired,
   currentStyleIndex: PropTypes.number.isRequired,
   product: PropTypes.instanceOf(Object).isRequired,
+  aveRate: PropTypes.string.isRequired,
+  totalCount: PropTypes.number.isRequired,
 };
 
 export default ProductInformation;

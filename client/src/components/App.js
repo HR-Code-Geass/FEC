@@ -43,7 +43,7 @@ function App() {
         <GlobalStyles />
         <Navbar theme={theme}>Threads</Navbar>
         <Container>
-          <Overview theme={theme} product={product} />
+          <Overview theme={theme} product={product} aveRate={aveRate} totalCount={totalCount} />
           {/* <RelatedItems /> */}
           <Questions />
           <Reviews

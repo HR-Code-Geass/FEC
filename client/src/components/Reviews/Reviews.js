@@ -107,7 +107,7 @@ const Reviews = ({
     </div>
   ));
   return (
-    <RatingAndReview>
+    <RatingAndReview id="reviews">
       <div style={{ width: '30%' }}>
         <RatingBreakdown
           data={data}
