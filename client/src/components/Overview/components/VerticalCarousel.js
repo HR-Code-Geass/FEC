@@ -30,6 +30,8 @@ function VerticalCarousel({
   const [display, setDisplay] = useState(0);
   const { length } = styles[currentStyleIndex].photos;
 
+  console.log(styles[currentStyleIndex]);
+
   const nextPhoto = () => {
     if (display !== length - 6) {
       setDisplay(display === length - 6 ? 0 : display + 1);
@@ -63,7 +65,7 @@ function VerticalCarousel({
       </div>
       {styles[currentStyleIndex].photos.map((photo, i) => (
         (i >= display && i <= display + 5)
-          ? (<StyleImg className={image === i ? 'current' : ''} onClick={() => setImg(i)} photo={photo.url} key={photo.url} />)
+          ? (<StyleImg className={image === i ? 'current' : ''} onClick={() => setImg(i)} photo={photo.thumbnail_url} key={photo.thumbnail_url} />)
           : null
       ))}
       <div
