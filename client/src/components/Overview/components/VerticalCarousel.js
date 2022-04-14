@@ -30,8 +30,6 @@ function VerticalCarousel({
   const [display, setDisplay] = useState(0);
   const { length } = styles[currentStyleIndex].photos;
 
-  console.log(styles[currentStyleIndex]);
-
   const nextPhoto = () => {
     if (display !== length - 6) {
       setDisplay(display === length - 6 ? 0 : display + 1);
