@@ -2,8 +2,16 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Searchinput = styled.input`
+const SearchDiv = styled.div`
   width: 100%
+`;
+
+const Searchinput = styled.input`
+  width: 100%;
+  border-radius: 50px;
+  border-style: none;
+  border: 1px solid black;
+  padding: 10px
 `;
 
 const ReviewSearch = ({ data, setReviewsData }) => {
@@ -20,7 +28,11 @@ const ReviewSearch = ({ data, setReviewsData }) => {
     }
   }, [data, searchdata, key]);
   return (
-    <Searchinput onChange={(e) => { setKey(e.target.value); }} />
+    <SearchDiv>
+      <label htmlFor="search">
+        <Searchinput style={{ width: '100%' }} placeholder="Find Reviews" onChange={(e) => { setKey(e.target.value); }} />
+      </label>
+    </SearchDiv>
   );
 };
 

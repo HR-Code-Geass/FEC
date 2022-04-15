@@ -21,6 +21,17 @@ const Response = styled.div`
   padding-left: 20px;
   padding-bottom: 20px;
 `;
+
+const UnstyledButton = styled.button`
+  all: unset;
+  text-decoration: underline;
+  color: #3F72AF;
+  &:hover {
+    color: #3F72AF;
+    cursor: pointer;
+  }
+`;
+
 const Photos = styled.div`
   display: flex;
   display: -webkit-flex;
@@ -56,7 +67,7 @@ const ReviewListEntry = ({ review, setDataUpdate }) => {
           {(moment(review.date).format('MMM DD, YYYY'))}
         </div>
       </RatingUser>
-      <h2 className="title">{review.summary}</h2>
+      <p style={{ fontSize: '140%', fontWeight: 'bold' }} className="title">{review.summary}</p>
       <Photos>
         {review.photos.map((photo) => (
           <ReviewPhotoEntry
@@ -104,24 +115,24 @@ const ReviewListEntry = ({ review, setDataUpdate }) => {
       </Response>
       <div style={{ padding: '15px' }}>
         Helpful?
-        <button
+        <UnstyledButton
           type="button"
           style={{ border: 'none', backgroundColor: 'white' }}
           onClick={() => { reviewHelpful(review.review_id); }}
         >
           Yes
-        </button>
+        </UnstyledButton>
         (
         {review.helpfulness}
         ) |
         {' '}
-        <button
+        <UnstyledButton
           type="button"
           style={{ border: 'none', backgroundColor: 'white' }}
           onClick={() => { reviewReport(review.review_id); }}
         >
           Report
-        </button>
+        </UnstyledButton>
         <hr />
       </div>
     </div>

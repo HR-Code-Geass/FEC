@@ -123,10 +123,10 @@ const RatingBreakdown = ({
       <LeftDiv>
         <RateNum>{aveRate}</RateNum>
         <StarBar rate={Number(aveRate)} />
-        <h4>
+        <p style={{ fontSize: '120%', fontWeight: 'bold' }}>
           {recomPer}
           % of reviews recommend this product
-        </h4>
+        </p>
         <br />
       </LeftDiv>
 

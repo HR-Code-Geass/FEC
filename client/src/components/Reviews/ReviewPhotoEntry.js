@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -16,34 +17,33 @@ const ReviewPhotoEntry = ({ photo }) => {
 
   return (
     <Photos>
+      {(photoOnClick)
+        ? (
+          <Modal
+            title="Photo"
+            content={(
+              <img
+                style={{ width: '600px', height: 'auto' }}
+                src={photo.url}
+                alt="productPhoto"
+              />
+              )}
+            onClose={() => setPhotoOnClick(false)}
+          />
+        )
+        : ''}
       <div
+        style={{
+          backgroundImage: `url(${photo.url})`, backgroundSize: 'cover', backgroundPosition: 'center', width: '150px', height: '100px',
+        }}
         role="button"
+        name="photo"
         key={photo.id}
         onClick={() => { setPhotoOnClick(true); }}
         onKeyPress={() => {}}
         tabIndex="0"
-      >
-        {(photoOnClick)
-          ? (
-            <Modal
-              title="Photo"
-              content={(
-                <img
-                  style={{ width: '600px' }}
-                  src={photo.url}
-                  alt="productPhoto"
-                />
-              )}
-              onClose={() => setPhotoOnClick(false)}
-            />
-          )
-          : ''}
-        <img
-          src={photo.url}
-          width="150"
-          alt="productPhoto"
-        />
-      </div>
+        aria-label="photo"
+      />
     </Photos>
   );
 };

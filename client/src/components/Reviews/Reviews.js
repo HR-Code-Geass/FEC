@@ -145,7 +145,7 @@ const Reviews = ({
     setSort(newSort);
   };
 
-  const collapseStyle = { position: 'relative', top: '-90%', right: '-70%' };
+  const collapseStyle = { position: 'relative', top: '-960px', left: '400px' };
   const reviews = reviewsData.map((review) => (
     <div className="review" key={review.review_id} style={{ width: '100%' }}>
       <ReviewListEntry review={review} setDataUpdate={setDataUpdate} />
@@ -203,9 +203,14 @@ const Reviews = ({
           </tbody>
         </table>
       </ReviewDiv>
-      <MoreReviewsBtn className={((totalCount <= 2 || reviewsData.length !== 2) ? 'hidden' : '')} onClick={() => { setReviewsData(data); setMoreReviewOnClick(true); }}>
-        MORE REVIEWS
-      </MoreReviewsBtn>
+      {(totalCount < 3 || reviewsData.length !== 2 || moreReviewOnClick)
+        ? ''
+        : (
+          <MoreReviewsBtn onClick={() => { setReviewsData(data); setMoreReviewOnClick(true); }}>
+            {' '}
+            MORE REVIEWS
+          </MoreReviewsBtn>
+        ) }
       <Button
         style={(totalCount <= 2) ? collapseStyle : { }}
         onClick={() => setisWritable(true)}
@@ -219,6 +224,7 @@ const Reviews = ({
 };
 
 Reviews.propTypes = {
+  product: PropTypes.instanceOf(Object).isRequired,
   productID: PropTypes.number.isRequired,
   setAveRate: PropTypes.func.isRequired,
   setTotalCount: PropTypes.func.isRequired,

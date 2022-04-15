@@ -14,11 +14,11 @@ const Select = styled.select`
 const ReviewSort = ({ changeSort, totalCount }) => (
   <div>
     <Sort>
-      <h4>
+      <p style={{ fontSize: '100%', fontWeight: 'bold' }}>
         {totalCount}
         {' '}
         reviews, sorted by
-      </h4>
+      </p>
       <Select onChange={(e) => { changeSort(e.target.value); }}>
         <option value="relevant">Relevant</option>
         <option value="newest">Newest</option>
