@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import * as Form from '../presentation/ModalForm.styles';
 
-const AskQuestionModalContent = ({ productID, onClose }) => {
+const AskQuestionModalContent = ({ productID, onClose, productName }) => {
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -45,7 +45,7 @@ const AskQuestionModalContent = ({ productID, onClose }) => {
 
   return (
     <Form.Container>
-      <h2>{`About the [Product w/ ID ${productID}]`}</h2>
+      <h3 style={{ margin: '5px' }}>{`About the ${productName}`}</h3>
       {errorMessage && <Form.Error>{errorMessage}</Form.Error>}
       {successMessage && <Form.Success>{successMessage}</Form.Success>}
       <Form.Form onSubmit={handleFormSubmit}>
@@ -83,7 +83,9 @@ const AskQuestionModalContent = ({ productID, onClose }) => {
         <Form.Disclaimer>
           For authentication reasons, you will not be emailed.
         </Form.Disclaimer>
+
         <Form.Button type="submit">Submit Question</Form.Button>
+
       </Form.Form>
     </Form.Container>
   );
@@ -92,6 +94,7 @@ const AskQuestionModalContent = ({ productID, onClose }) => {
 AskQuestionModalContent.propTypes = {
   productID: PropTypes.number.isRequired,
   onClose: PropTypes.func.isRequired,
+  productName: PropTypes.string.isRequired,
 };
 
 export default AskQuestionModalContent;

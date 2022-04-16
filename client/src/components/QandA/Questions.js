@@ -52,7 +52,7 @@ const Questions = ({ productID, productName }) => {
     <QA.QAContainer>
       <Line />
       <h3 style={{ marginBottom: '5px' }}>Questions & Answers</h3>
-      <AskQuestion productID={productID} />
+      <AskQuestion productID={productID} productName={productName} />
       <QA.QABody>
         <QA.QALeftDiv>
           <QuestionSearch setQuestionFilter={setQuestionFilter} />

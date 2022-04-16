@@ -29,11 +29,12 @@ const ModalContent = styled.div`
 `;
 
 const ModalHeader = styled.div`
-padding: 2px 16px;
+padding: 2px 5px;
 border-top-left-radius: 10px;
 border-top-right-radius: 10px;
-background-color: #555;
-color: white;
+color: #333333;
+display: flex;
+justify-content: center;
 `;
 
 const ModalBody = styled.div`
@@ -45,6 +46,8 @@ const CloseSpan = styled.span`
   float: right;
   font-size: 28px;
   font-weight: bold;
+  position: absolute;
+  margin-left: 600px;
 
   &:hover,
   &:focus {
@@ -64,10 +67,10 @@ const Modal = ({ title, content, onClose }) => ReactDOM.createPortal(
   <ModalContainer onClick={onClose}>
     <ModalContent onClick={(e) => e.stopPropagation()}>
       <ModalHeader>
+        <h2 style={{ margin: '5px' }}>{title}</h2>
         <CloseSpan onClick={onClose}>
           &times;
         </CloseSpan>
-        <h2>{title}</h2>
       </ModalHeader>
       <ModalBody>
         {content}

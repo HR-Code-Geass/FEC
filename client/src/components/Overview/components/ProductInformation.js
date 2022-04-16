@@ -47,7 +47,7 @@ function ProductInformation({
           ? `$${styles?.[currentStyleIndex]?.original_price}`
           : (
             <div style={{
-              transform: 'translateX(35px)',
+              transform: 'translateX(10px)',
             }}
             >
               <strike>{`$${styles?.[currentStyleIndex]?.original_price}`}</strike>

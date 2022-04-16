@@ -11,8 +11,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 1280px;
-  margin-left: 40px;
+  width: 1100px;
+  margin-left: 140px;
   align-items: center;
 `;
 
