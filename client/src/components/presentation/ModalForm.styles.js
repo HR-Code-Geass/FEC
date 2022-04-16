@@ -3,6 +3,20 @@ import styled from 'styled-components';
 export const Button = styled.button`
   display: block;
   margin: auto;
+  background: #3C3C3C;
+  color: white;
+  border-radius: 50px;
+  padding: 0.75em 2em;
+  border-style: none;
+  border: 2px solid #333333;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  &:hover {
+  background-color: black;
+  cursor: pointer;
+  };
 `;
 
 export const Container = styled.div`

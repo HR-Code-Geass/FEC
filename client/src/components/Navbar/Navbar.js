@@ -26,7 +26,7 @@ function Navbar() {
             <Account />
             <Cart />
             <div className="dark-mode-btn" style={theme === 'light' ? { background: '#3C3C3C', cursor: 'pointer' } : { background: '#DBE2EF', cursor: 'pointer' }} onClick={themeToggler} aria-hidden="true">
-              <div className="dark-mode-toggle" style={theme === 'light' ? { transform: 'translateX(-1px)', transition: 'transform 0.3s ease-in-out' } : { transform: 'translateX(-20px)', transition: 'transform 0.3s ease-in-out', background: '#3C3C3C' }} />
+              <div className="dark-mode-toggle" style={theme === 'light' ? { transform: 'translateX(-1px)', transition: 'transform 0.2s ease-in-out' } : { transform: 'translateX(-20px)', transition: 'transform 0.2s ease-in-out', background: '#3C3C3C' }} />
             </div>
           </div>
         </div>

@@ -48,9 +48,24 @@ const Question = styled.div`
 const QuestionLinks = styled.div`
 `;
 
-const QuestionsListEntry = ({ question, productID }) => {
+// Comparator to help sort by "helpfulness"
+function helpfulnessComparator(a, b) {
+  return b.helpfulness - a.helpfulness;
+}
+
+// Comparator to prioritize answers from sellers
+function sellerComparator(a, b) {
+  return (b.answerer_name === 'Seller') - (a.answerer_name === 'Seller');
+}
+
+const QuestionsListEntry = ({ question, productName }) => {
   const [displayLimit, setDisplayLimit] = useState(2); // number of answers to display
   const [markedHelpful, setMarkedHelpful] = useState(false);
+  const [answers, setAnswers] = useState(
+    Object.values(question.answers || {}).sort(helpfulnessComparator).sort(sellerComparator),
+  );
+
+  const { question_id: questionID, question_body: questionBody } = question;
 
   const markHelpful = () => {
     if (markedHelpful) return; // can only mark an answer helpful once
@@ -60,14 +75,7 @@ const QuestionsListEntry = ({ question, productID }) => {
       .catch((err) => console.error(`Error marking question helpful: ${err}`));
   };
 
-  const { question_id: questionID, question_body: questionBody } = question;
-  let { answers } = question;
-
-  // comparator to sort answers by "helpfulness" property
-  const helpfulnessComparator = (a, b) => b.helpfulness - a.helpfulness;
-  const sellerComparator = (a, b) => (b.answerer_name === 'Seller') - (a.answerer_name === 'Seller');
-  // TODO: Put answers by seller at the top!
-  answers = Object.values(answers || {}).sort(helpfulnessComparator).sort(sellerComparator);
+  const addAnswerToList = (newAnswer) => setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
 
   const buttonToDisplay = () => {
     if (answers.length <= 2) return null;
@@ -103,9 +111,10 @@ const QuestionsListEntry = ({ question, productID }) => {
               <UnstyledButton type="button" onClick={markHelpful}>Yes</UnstyledButton>
               {` (${question.question_helpfulness + markedHelpful}) | `}
               <AddAnswer
-                productID={productID}
+                productName={productName}
                 questionID={questionID}
                 questionBody={questionBody}
+                addAnswerToList={addAnswerToList}
               />
             </QuestionLinks>
           </QuestionContainer>
@@ -133,7 +142,7 @@ const QuestionsListEntry = ({ question, productID }) => {
 
 QuestionsListEntry.propTypes = {
   question: PropTypes.instanceOf(Object).isRequired,
-  productID: PropTypes.number.isRequired,
+  productName: PropTypes.string.isRequired,
 };
 
 export default QuestionsListEntry;

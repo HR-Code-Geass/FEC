@@ -19,6 +19,7 @@ background-size: cover;
 border-radius: 50%;
 background-position: center;
 margin-right: 10px;
+margin-bottom: 10px;
 
 &:hover {
   cursor: pointer;

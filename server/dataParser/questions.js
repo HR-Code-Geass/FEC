@@ -51,6 +51,7 @@ module.exports = {
         .catch((err) => reject(err));
     });
   },
+
   makeAnswerAsHelpful(answerID) {
     return new Promise((resolve, reject) => {
       heroku.put(`/qa/answers/${answerID}/helpful`, '')

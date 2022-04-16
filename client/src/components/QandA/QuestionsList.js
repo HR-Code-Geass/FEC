@@ -28,7 +28,7 @@ const QLContainer = styled.div`
   text-align: center;
 `;
 
-const QuestionsList = ({ questions, displayLimit, productID }) => (
+const QuestionsList = ({ questions, displayLimit, productName }) => (
   <QLContainer>
     <QAContainer>
       <QuestionsTable>
@@ -40,7 +40,7 @@ const QuestionsList = ({ questions, displayLimit, productID }) => (
           {questions?.map((q, i) => (
             (i >= displayLimit)
               ? null
-              : <QuestionsListEntry question={q} key={q.question_id} productID={productID} />
+              : <QuestionsListEntry question={q} key={q.question_id} productName={productName} />
           ))}
         </tbody>
       </QuestionsTable>
@@ -50,7 +50,7 @@ const QuestionsList = ({ questions, displayLimit, productID }) => (
 QuestionsList.propTypes = {
   questions: PropTypes.instanceOf(Array).isRequired,
   displayLimit: PropTypes.number.isRequired,
-  productID: PropTypes.number.isRequired,
+  productName: PropTypes.string.isRequired,
 };
 
 export default QuestionsList;

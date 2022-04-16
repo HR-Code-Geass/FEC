@@ -22,7 +22,7 @@ function Overview({
         setStyles(res.data.results);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err.message);
       });
   }, [product]);
 
@@ -56,7 +56,7 @@ function Overview({
           styles={styles}
           currentStyleIndex={currentStyleIndex}
         />
-        {product?.description}
+        {product.description}
       </div>
     </div>
   );

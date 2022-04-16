@@ -4,7 +4,7 @@ import Modal from '../Modal';
 import AskQuestionModalContent from './AskQuestionModalContent';
 import { LinkButton } from '../presentation/Button.styles';
 
-const AskQuestion = ({ productID }) => {
+const AskQuestion = ({ productID, productName }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -19,6 +19,7 @@ const AskQuestion = ({ productID }) => {
             <AskQuestionModalContent
               onClose={() => setIsModalOpen(false)}
               productID={productID}
+              productName={productName}
             />
           )}
         />
@@ -29,6 +30,7 @@ const AskQuestion = ({ productID }) => {
 
 AskQuestion.propTypes = {
   productID: PropTypes.number.isRequired,
+  productName: PropTypes.string.isRequired,
 };
 
 export default AskQuestion;

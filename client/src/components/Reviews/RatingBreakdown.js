@@ -16,18 +16,19 @@ const LeftDiv = styled.div`
 `;
 
 const MidDiv = styled.div`
-  padding: 70px 40px 0px 40px;
+  padding: 0px 40px 0px 40px;
   width: 50%;
 `;
 
 const RightDiv = styled.div`
-  padding: 30px 0px 0px 30px;
+  padding: 0px 0px 0px 30px;
   width: 50%;
 `;
 
 const RatingUser = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const ScaleDiv = styled.div`
@@ -76,8 +77,8 @@ const CharForthScaleDiv = styled.div`
 
 const StarButton = styled.button`
 
-  width: 100%;
-  heigth: 100%;
+  width: 60px;
+  height: 48px;
   background-color: Transparent;
   border: none;
 `;
@@ -122,10 +123,10 @@ const RatingBreakdown = ({
       <LeftDiv>
         <RateNum>{aveRate}</RateNum>
         <StarBar rate={Number(aveRate)} />
-        <h4>
+        <p style={{ fontSize: '120%', fontWeight: 'bold' }}>
           {recomPer}
           % of reviews recommend this product
-        </h4>
+        </p>
         <br />
       </LeftDiv>
 
@@ -226,6 +227,7 @@ const RatingBreakdown = ({
             setStar4onClick(false); setStar5onClick(false);
             setfilter([]);
           }}
+          style={{ marginLeft: '70px' }}
         >
           <u>no filter</u>
 

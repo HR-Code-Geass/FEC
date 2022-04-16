@@ -72,7 +72,7 @@ function Cart({ styles, currentStyleIndex }) {
   const addToCart = () => {
     axios.post('/cart', { sku_id: cart.sku, count: cart.quantity })
       .catch((err) => {
-        console.log(err);
+        console.error(err.message);
       });
   };
 

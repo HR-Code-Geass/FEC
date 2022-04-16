@@ -1,77 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import styled, { ThemeProvider } from 'styled-components';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 import Navbar from './Navbar/Navbar';
-import Overview from './Overview/Overview';
-import Reviews from './Reviews/Reviews';
+import ProductPage from './ProductPage';
+// import Overview from './Overview/Overview';
 import Questions from './QandA/Questions';
-import RelatedItems from './RelatedItems';
+// import Reviews from './Reviews/Reviews';
 
 import { GlobalStyles } from './globalStyles';
 import { lightTheme, darkTheme } from './Themes';
 
-const Container = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-width: 1280px;
-margin-left: 40px;
-align-items: center;
-`;
-
-function App() {
+const App = () => {
   const [theme] = useState('light');
-  const [productId] = useState(65635);
-  const [product, setProduct] = useState({});
-  const [aveRate, setAveRate] = useState('');
-  const [totalCount, setTotalCount] = useState(0);
-
-  useEffect(() => {
-    axios.get(`/products/${productId}`)
-      .then((res) => {
-        setProduct(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [productId]);
 
   return (
     <div>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
         <Navbar theme={theme}>Threads</Navbar>
-        <Container>
-          <Overview theme={theme} product={product} aveRate={aveRate} totalCount={totalCount} />
-          {/* <RelatedItems productID={productId} /> */}
-          <Questions />
-          <Reviews
-            product={product}
-            productID={productId}
-            setAveRate={setAveRate}
-            setTotalCount={setTotalCount}
-            aveRate={aveRate}
-            totalCount={totalCount}
-          />
-        </Container>
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              exact
+              element={<ProductPage theme={theme} />}
+            />
+            <Route
+              path="QandA"
+              element={<Questions productID={65635} productName="Heir Force Ones" />}
+            />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </div>
   );
-}
+};
 
 export default App;
-
-// const [cart, setCart] = useState({ items: 0, products: [{}] });
-
-// function incrementCart() {
-//   setCart((prevCart) => ({ items: prevCart.items + 1 }));
-// }
-
-// function decrementCart() {
-//   cart.items > 0 ? setCart((prevCart) => ({ items: prevCart.items - 1 })) : null;
-// }
-
-// cart={cart} decrementCart={decrementCart}
-
-// incrementCart={incrementCart}
