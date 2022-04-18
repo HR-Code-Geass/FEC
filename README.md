@@ -5,7 +5,7 @@
 Description about Threads. Front End Capstone Project for Hack Reactor.
 
 [Components](#getting-started) •
-[Installation](#installation) •
+[Installation](#installation)
 
 <!-- Gif of our page.  -->
 
