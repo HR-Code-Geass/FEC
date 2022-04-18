@@ -2,22 +2,21 @@
 
 # Threads
 
-Front End Capstone Project for Hack Reactor.
+Description about Threads. Front End Capstone Project for Hack Reactor.
 
-[Getting started](#getting-started) •
+[Components](#getting-started) •
 [Installation](#installation) •
-[Configuration](#configuration) •
-[Integrations](#third-party-integrations)
+
+<!-- Gif of our page.  -->
 
 </div>
 
-## Description
+## Components
+### Product Overview
 
-Our team delivered a fully functional web application that met all the specifications and requirements outlined by the project stakeholders. The work was divided among team members who worked in collaborated to produce a single front-end application with the integration of an existing API for the product.
+### Questions & Answers
 
-## Table of Contents
-
-- [Installation](#installation)
+### Reviews
 
 
 ## Installation
