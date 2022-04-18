@@ -64,7 +64,7 @@ const MoreReviewsBtn = styled.div`
 
 const ReviewDiv = styled.div`
   height: 100vh;
-  width: 100%;
+  width: 1000px;
   overflow: auto;
   margin-bottom: 20px;
 `;
@@ -145,9 +145,9 @@ const Reviews = ({
     setSort(newSort);
   };
 
-  const collapseStyle = { position: 'relative', top: '-960px', left: '400px' };
+  const collapseStyle = { display: 'none' };
   const reviews = reviewsData.map((review) => (
-    <div className="review" key={review.review_id} style={{ width: '100%' }}>
+    <div className="review" key={review.review_id} style={{ width: '1000px' }}>
       <ReviewListEntry review={review} setDataUpdate={setDataUpdate} />
     </div>
   ));
@@ -179,8 +179,26 @@ const Reviews = ({
           setTotalCount={setTotalCount}
         />
       </RRTop>
-      <ReviewSearch data={data} setReviewsData={setReviewsData} />
+      {totalCount <= 2
+        ? (
+          <Button
+            style={(totalCount <= 2)}
+            onClick={() => setisWritable(true)}
+          >
+            {' '}
+            ADD A REVIEW
+            {' '}
+            <PlusIcon style={{ height: '13px' }} />
+          </Button>
+        )
+        : ''}
+      <ReviewSearch
+        data={data}
+        setReviewsData={setReviewsData}
+        setTotalCount={setTotalCount}
+      />
       <ReviewSort changeSort={changeSort} totalCount={totalCount} />
+
       <ReviewForm
         product={product}
         productID={productID}

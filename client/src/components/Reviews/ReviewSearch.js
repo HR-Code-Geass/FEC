@@ -30,7 +30,7 @@ const ReviewSearch = ({ data, setReviewsData }) => {
   return (
     <SearchDiv>
       <label htmlFor="search">
-        <Searchinput style={{ width: '100%' }} placeholder="Find Reviews" onChange={(e) => { setKey(e.target.value); }} />
+        <Searchinput style={{ width: '100%' }} placeholder="Search Reviews" onChange={(e) => { setKey(e.target.value); }} />
       </label>
     </SearchDiv>
   );

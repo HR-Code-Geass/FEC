@@ -35,6 +35,41 @@ const Photos = styled.div`
   justify-content: flex-start;
 `;
 
+const Button = styled.button`
+  background: #3C3C3C;
+  color: white;
+  border-radius: 50px;
+  margin: 0 1em;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  padding: 0.5em 2em;
+  border-style: none;
+  border: 2px solid #333333;
+  font-family: 'Poppins', sans-serif;
+  width: auto;
+  font-size: 14px;
+
+  &:hover {
+  background-color: white;
+  color: #3C3C3C;
+  cursor: pointer;
+  };
+`;
+
+const ExitButton = styled.button`
+  position: absolute;
+  right: 0px;
+  background: white;
+  color: #3C3C3C;
+  border-radius: 100px;
+
+  &:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    };
+  `;
+
 const ReviewForm = ({
   product, productID, isWritable, setisWritable, char, setDataUpdate, setSort,
 }) => {
@@ -84,7 +119,7 @@ const ReviewForm = ({
       const fd = new FormData();
       fd.append('image', file);
       axios.post('/uploadimage', fd, { headers: { 'content-Type': 'multipart/form-data' } })
-        .then((res) => { setPhotos((prev) => [...prev, res.data.displayURL]); })
+        .then((res) => { setPhotos((prev) => [...prev, res.data.displayURL]); setSort('newest'); })
         .catch((err) => console.error(err));
     });
   };
@@ -427,25 +462,24 @@ const ReviewForm = ({
                 setSelectPhoto((prev) => [...prev, (e.target.files[0])]);
               }}
             />
-            <button type="button">
+            <Button style={{ marginTop: '0px' }} type="button">
               <label htmlFor="image_input">
-                Choose Photos
+                CHOOSE A PHOTO
               </label>
-            </button>
+            </Button>
 
           </div>
           <Photos>
             {selectPhoto.map((photo) => (
               <div style={{ position: 'relative' }}>
-                <button
+                <ExitButton
                   type="button"
                   className={isupload ? 'hidden' : ''}
-                  style={{ position: 'absolute', right: '0' }}
                   onClick={() => { setSelectPhoto(selectPhoto.filter((item) => item !== photo)); }}
                 >
                   X
 
-                </button>
+                </ExitButton>
                 <img
                   alt="product"
                   style={{ width: '120px' }}
@@ -456,13 +490,14 @@ const ReviewForm = ({
             ))}
 
           </Photos>
-          <button
+          <Button
+            style={{ position: 'relative', left: '70%' }}
             type="button"
             className={isupload ? 'hidden' : ''}
             onClick={() => handleUpload()}
           >
-            Upload
-          </button>
+            UPLOAD
+          </Button>
 
         </li>
 
@@ -506,9 +541,13 @@ const ReviewForm = ({
         </li>
 
         <li>
-          <button type="submit" onClick={() => { handleSubmit(); }}>
-            Submit review
-          </button>
+          <Button
+            style={{ position: 'relative', left: '30%' }}
+            type="submit"
+            onClick={() => { handleSubmit(); }}
+          >
+            SUBMIT A REVIEW
+          </Button>
         </li>
       </ReviewFormUl>
     </div>
