@@ -4,6 +4,11 @@
 
 Front End Capstone Project for Hack Reactor.
   
+[Components](#getting-started) •
+[Installation](#installation)
+  
+</div>
+  
   ## Technologies ##
 
 **Front-end:** &emsp;&nbsp;&nbsp;
@@ -21,13 +26,12 @@ Front End Capstone Project for Hack Reactor.
   ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
 &emsp;
+  
 
 [Components](#getting-started) •
 [Installation](#installation)
 
-<!-- Gif of our page.  -->
-
-</div>
+<!-- Gif  -->
 
 ## Components
 ### Product Overview
