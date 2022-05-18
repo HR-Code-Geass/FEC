@@ -28,9 +28,6 @@ Front End Capstone Project for Hack Reactor.
 &emsp;
   
 
-[Components](#getting-started) •
-[Installation](#installation)
-
 <!-- Gif  -->
 
 ## Components
