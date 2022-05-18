@@ -2,7 +2,7 @@
 
 # Threads
 
-Description about Threads. Front End Capstone Project for Hack Reactor.
+Front End Capstone Project for Hack Reactor.
 
 [Components](#getting-started) •
 [Installation](#installation)
