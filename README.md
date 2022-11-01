@@ -1,6 +1,8 @@
 <div align="center">
 
 # Threads
+
+A product detail page that shows relevant information for a single product from an API catalog. 
   
 [Components](#getting-started) •
 [Installation](#installation) • [Contributers](#contributers)
