@@ -5,7 +5,7 @@
 Front End Capstone Project for Hack Reactor.
   
 [Components](#getting-started) •
-[Installation](#installation)
+[Installation](#installation) • [Contributers](#contributers)
   
 </div>
   
@@ -40,6 +40,49 @@ Front End Capstone Project for Hack Reactor.
 &emsp;
 
 ## Installation
+
+## Contributers
+<table>
+  <tr>
+    <th>Amy Kwak</th>
+    <th>Jake Gilfix</th>
+    <th>Anny Wang</th>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://github.com/amyKwak">
+        <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
+      </a>
+    <td>
+      <a href="https://github.com/jakemgilfix">
+        <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
+      </a>
+    </td>
+    </td>
+    <td>
+      <a href="https://github.com/astrjc0326">
+        <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://www.linkedin.com/in/amykwak/">
+        <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
+      </a>
+    <td>
+      <a href="https://www.linkedin.com/in/jakegilfix/">
+        <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
+      </a>
+    </td>
+    </td>
+    <td>
+      <a href="https://www.linkedin.com/in/hsinanwang/">
+        <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
+      </a>
+    </td>
+  </tr>
+</table>
 
 <!-- # Instructions for development
 
