@@ -1,8 +1,6 @@
 <div align="center">
 
 # Threads
-
-Front End Capstone Project for Hack Reactor.
   
 [Components](#getting-started) •
 [Installation](#installation) • [Contributers](#contributers)
