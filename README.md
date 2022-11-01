@@ -50,7 +50,7 @@ Front End Capstone Project for Hack Reactor.
   </tr>
   <tr>
     <td>
-      <a href="https://github.com/amyKwak">
+      <a href="https://github.com/amyKwak" target="_blank">
         <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
       </a>
     <td>
