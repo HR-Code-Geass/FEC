@@ -67,7 +67,7 @@ Front End Capstone Project for Hack Reactor.
   </tr>
   <tr>
     <td>
-      <a href="https://www.linkedin.com/in/amykwak/">
+      <a href="https://www.linkedin.com/in/amykwak/" target="_blank">
         <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
       </a>
     <td>
